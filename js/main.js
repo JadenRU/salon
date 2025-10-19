@@ -1,7 +1,7 @@
-// В начале файла добавьте константу с URL вашего бота на Render
-const BOT_API_URL = 'https://salon-8lor.onrender.com'; // ЗАМЕНИТЕ на реальный URL
+// В самом начале main.js добавьте:
+const BOT_API_URL = 'https://salon-8lor.onrender.com'; // Ваш реальный URL
 
-// Обновите функцию подтверждения записи
+// Обновите функцию подтверждения записи:
 confirmBtn.addEventListener('click', async () => {
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
@@ -18,7 +18,7 @@ confirmBtn.addEventListener('click', async () => {
   }
 
   const booking = {
-    id: Date.now().toString(), // Преобразуем в строку для надежности
+    id: Date.now().toString(), // Важно: строка!
     name: name,
     phone: phone,
     date: date,
@@ -28,48 +28,44 @@ confirmBtn.addEventListener('click', async () => {
     serviceDuration: serviceDuration
   };
 
-  console.log('Отправляю запись на сервер:', booking);
+  console.log('🔄 Отправляю запись:', booking);
 
   try {
-    // Показываем индикатор загрузки
     confirmBtn.disabled = true;
     confirmBtn.textContent = 'Отправка...';
 
-    // Отправляем запись на сервер бота
     const response = await fetch(`${BOT_API_URL}/api/book`, {
       method: 'POST',
       headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(booking)
     });
 
     const result = await response.json();
+    console.log('📨 Ответ сервера:', result);
     
     if (result.success) {
-      console.log('✅ Запись успешно создана:', result);
+      console.log('✅ Запись создана! ID:', result.bookingId);
       
-      // Открываем бота с ID записи
-      const botUrl = `https://t.me/NadezhdaBeauty_Bot?start=${booking.id}`;
+      // Открываем бота
+      const botUrl = `https://t.me/NadezhdaBeauty_Bot?start=${result.bookingId}`;
       window.open(botUrl, '_blank');
       
-      // Показываем сообщение об успехе
-      alert(`✅ Запись отправлена!\n\nID вашей записи: ${booking.id}\n\nОткрыт чат с ботом для подтверждения.`);
+      alert(`✅ Запись отправлена!\n\nID: ${result.bookingId}\n\nОткрываю чат с ботом...`);
       
       // Сбрасываем форму
       document.getElementById('booking-form').reset();
       generateTimeSlots();
       
     } else {
-      console.error('❌ Ошибка при создании записи:', result);
-      alert('Ошибка при отправке записи: ' + (result.error || 'Неизвестная ошибка'));
+      console.error('❌ Ошибка:', result.error);
+      alert('Ошибка: ' + (result.error || 'Неизвестная ошибка'));
     }
   } catch (error) {
     console.error('❌ Ошибка сети:', error);
-    alert('Ошибка соединения с сервером. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.');
+    alert('Ошибка соединения. Попробуйте позже или позвоните нам.');
   } finally {
-    // Восстанавливаем кнопку
     confirmBtn.disabled = false;
     confirmBtn.textContent = 'Записаться';
   }

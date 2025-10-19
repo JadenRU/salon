@@ -1,5 +1,4 @@
 import express from 'express';
-import fetch from 'node-fetch';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -23,7 +22,7 @@ app.post('/new-booking', async (req, res) => {
   const message = `📌 Новая запись\nИмя: ${name}\nТелефон: ${phone}\nУслуга: ${serviceName}\nДата: ${date}\nВремя: ${time}\nСтоимость: ${price} ₽`;
 
   try {
-    // Отправка в Telegram
+    // Используем встроенный fetch в Node 18+
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

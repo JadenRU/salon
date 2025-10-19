@@ -9,7 +9,7 @@ const ADMIN_ID = 828439309;
 const app = express();
 app.use(express.json());
 
-// Создаем бота без автоматического polling
+// Создаем бота
 const bot = new TelegramBot(TOKEN);
 
 // Хранилище записей
@@ -17,14 +17,22 @@ let bookings = [];
 let clients = {};
 
 // Настройка webhook
-const WEBHOOK_URL = process.env.RENDER_EXTERNAL_URL || 'https://your-app-name.onrender.com';
-bot.setWebHook(`${WEBHOOK_URL}/bot${TOKEN}`);
-
-// Обработка webhook запросов от Telegram
-app.post(`/bot${TOKEN}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
-});
+const setupWebhook = async () => {
+  try {
+    // Получаем URL из переменной окружения Render
+    const WEBHOOK_URL = process.env.RENDER_EXTERNAL_URL || `https://ваше-название-приложения.onrender.com`;
+    
+    // Устанавливаем webhook
+    await bot.setWebHook(`${WEBHOOK_URL}/bot${TOKEN}`);
+    console.log(`🌐 Webhook установлен: ${WEBHOOK_URL}/bot${TOKEN}`);
+    
+    // Проверяем информацию о webhook
+    const webhookInfo = await bot.getWebHookInfo();
+    console.log('📊 Информация о webhook:', webhookInfo);
+  } catch (error) {
+    console.error('❌ Ошибка настройки webhook:', error.message);
+  }
+};
 
 // Команда /start
 bot.onText(/\/start(?: (\d+))?/, (msg, match) => {
@@ -89,7 +97,7 @@ bot.on('message', (msg) => {
   }
 });
 
-// Напоминания (остаются такими же)
+// Напоминание за день до записи
 cron.schedule('0 10 * * *', () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -104,6 +112,7 @@ cron.schedule('0 10 * * *', () => {
   });
 });
 
+// Напоминание за 2 часа до записи
 cron.schedule('0 * * * *', () => {
   const now = new Date();
   const inTwoHours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
@@ -137,11 +146,28 @@ function addBooking(booking) {
   );
 }
 
+// Обработка webhook запросов от Telegram
+app.post(`/bot${TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+// Корневой маршрут для проверки работы
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'Bot is running', 
+    bookingsCount: bookings.length,
+    webhook: `https://${req.get('host')}/bot${TOKEN}`
+  });
+});
+
 // Запуск сервера
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`🚀 Сервер запущен на порту ${PORT}`);
-  console.log(`🌐 Webhook установлен: ${WEBHOOK_URL}/bot${TOKEN}`);
+  
+  // Настраиваем webhook после запуска сервера
+  await setupWebhook();
 });
 
 module.exports = { addBooking, bookings };

@@ -1,3 +1,7 @@
+// В начале файла добавьте константу с URL вашего бота на Render
+const BOT_API_URL = 'https://salon-8lor.onrender.com'; // ЗАМЕНИТЕ на реальный URL
+
+// Обновите функцию подтверждения записи
 confirmBtn.addEventListener('click', async () => {
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
@@ -6,7 +10,7 @@ confirmBtn.addEventListener('click', async () => {
   const serviceOption = serviceSelect.options[serviceSelect.selectedIndex];
   const serviceName = serviceOption.text;
   const servicePrice = serviceOption.value;
-  const serviceDuration = serviceOption.dataset.duration;
+  const serviceDuration = serviceOption.dataset.duration || '60 мин';
   
   if (!name || !phone || !date || !time || !servicePrice) {
     alert('Пожалуйста, заполните все поля формы и выберите время');
@@ -14,45 +18,59 @@ confirmBtn.addEventListener('click', async () => {
   }
 
   const booking = {
-    id: Date.now(),
-    name,
-    phone,
-    date,
-    time,
-    serviceName,
-    servicePrice,
-    serviceDuration
+    id: Date.now().toString(), // Преобразуем в строку для надежности
+    name: name,
+    phone: phone,
+    date: date,
+    time: time,
+    serviceName: serviceName,
+    servicePrice: servicePrice,
+    serviceDuration: serviceDuration
   };
 
+  console.log('Отправляю запись на сервер:', booking);
+
   try {
+    // Показываем индикатор загрузки
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Отправка...';
+
     // Отправляем запись на сервер бота
-    const API_URL = 'https://salon-8lor.onrender.com'; // Замените на ваш URL Render
-    
-    const response = await fetch(`${API_URL}/api/book`, {
+    const response = await fetch(`${BOT_API_URL}/api/book`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: JSON.stringify(booking)
     });
 
     const result = await response.json();
     
     if (result.success) {
+      console.log('✅ Запись успешно создана:', result);
+      
       // Открываем бота с ID записи
       const botUrl = `https://t.me/NadezhdaBeauty_Bot?start=${booking.id}`;
       window.open(botUrl, '_blank');
       
       // Показываем сообщение об успехе
-      alert('Запись отправлена! Открыт чат с ботом для подтверждения.');
+      alert(`✅ Запись отправлена!\n\nID вашей записи: ${booking.id}\n\nОткрыт чат с ботом для подтверждения.`);
       
       // Сбрасываем форму
       document.getElementById('booking-form').reset();
       generateTimeSlots();
+      
     } else {
-      alert('Ошибка при отправке записи: ' + result.error);
+      console.error('❌ Ошибка при создании записи:', result);
+      alert('Ошибка при отправке записи: ' + (result.error || 'Неизвестная ошибка'));
     }
   } catch (error) {
-    console.error('Ошибка:', error);
-    alert('Ошибка соединения с сервером. Пожалуйста, попробуйте позже.');
+    console.error('❌ Ошибка сети:', error);
+    alert('Ошибка соединения с сервером. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.');
+  } finally {
+    // Восстанавливаем кнопку
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = 'Записаться';
   }
 });
-

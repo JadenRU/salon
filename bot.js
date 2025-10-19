@@ -1,45 +1,128 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
+const TelegramBot = require('node-telegram-bot-api');
+const cron = require('node-cron');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// Твой бот
+const TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
+const ADMIN_ID = 828439309;
 
-app.use(cors({ origin: '*' })); // разрешаем все домены
-app.use(bodyParser.json());
+const bot = new TelegramBot(TOKEN, { polling: true });
 
-// Telegram bot info
-const BOT_TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
-const USER_ID = '828439309';
+// Хранилище записей (в реальном приложении используйте базу данных)
+let bookings = [];
+let clients = {}; // Для хранения chatId клиентов
 
-app.post('/new-booking', async (req, res) => {
-  const { name, phone, date, time, serviceName, price } = req.body;
-
-  if (!name || !phone || !date || !time || !serviceName) {
-    return res.status(400).json({ error: 'Заполните все поля' });
+// Команда /start
+bot.onText(/\/start(?: (\d+))?/, (msg, match) => {
+  const chatId = msg.chat.id;
+  const bookingId = match[1];
+  
+  if (bookingId) {
+    // Клиент перешел по ссылке с ID записи
+    const booking = bookings.find(b => b.id == bookingId);
+    if (booking) {
+      // Сохраняем chatId клиента для напоминаний
+      clients[booking.id] = chatId;
+      booking.chatId = chatId;
+      
+      bot.sendMessage(chatId, 
+        `✅ Ваша запись подтверждена!\n\n` +
+        `📅 ${booking.serviceName}\n` +
+        `📆 Дата: ${booking.date}\n` +
+        `⏰ Время: ${booking.time}\n` +
+        `💳 Стоимость: ${booking.servicePrice} ₽\n\n` +
+        `Мы отправим вам напоминание за день и за 2 часа до визита.`
+      );
+      
+      // Уведомление администратору
+      bot.sendMessage(ADMIN_ID,
+        `✅ Новая запись подтверждена!\n\n` +
+        `👤 Имя: ${booking.name}\n` +
+        `📞 Телефон: ${booking.phone}\n` +
+        `📅 Услуга: ${booking.serviceName}\n` +
+        `📆 Дата: ${booking.date}\n` +
+        `⏰ Время: ${booking.time}\n` +
+        `💳 Стоимость: ${booking.servicePrice} ₽`
+      );
+    } else {
+      bot.sendMessage(chatId, 'Запись не найдена. Пожалуйста, свяжитесь с администратором.');
+    }
+  } else {
+    // Обычный старт бота
+    bot.sendMessage(chatId, 
+      '👋 Добро пожаловать!\n\n' +
+      'Я бот-помощник косметолога Надежды Гнатюк.\n\n' +
+      'Если у вас есть вопросы или вы хотите записаться на процедуру, ' +
+      'посетите наш сайт или свяжитесь напрямую с администратором.'
+    );
   }
+});
 
-  const message = `📌 Новая запись\nИмя: ${name}\nТелефон: ${phone}\nУслуга: ${serviceName}\nДата: ${date}\nВремя: ${time}\nСтоимость: ${price} ₽`;
-
-  try {
-    // встроенный fetch в Node 18+
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: USER_ID, text: message })
-    });
-
-    res.status(200).json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Ошибка отправки в Telegram' });
+// Обработка обычных сообщений
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
+  
+  // Игнорируем команды
+  if (msg.text && msg.text.startsWith('/')) return;
+  
+  // Пересылаем сообщение администратору
+  if (chatId !== ADMIN_ID) {
+    const userName = msg.from.first_name + (msg.from.last_name ? ' ' + msg.from.last_name : '');
+    bot.sendMessage(ADMIN_ID, 
+      `✉️ Сообщение от ${userName} (@${msg.from.username || 'нет username'}):\n\n${msg.text}`
+    );
+    bot.sendMessage(chatId, 'Ваше сообщение отправлено администратору. Мы ответим вам в ближайшее время!');
   }
 });
 
-app.get('/', (req, res) => {
-  res.send('Salon Booking Server is running.');
+// Напоминание за день до записи
+cron.schedule('0 10 * * *', () => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split('T')[0];
+  
+  bookings.forEach(booking => {
+    if (booking.date === tomorrowStr && booking.chatId) {
+      bot.sendMessage(booking.chatId, 
+        `🔔 Напоминание: завтра в ${booking.time} у вас запись на "${booking.serviceName}"`
+      );
+    }
+  });
 });
 
-app.listen(PORT, () => {
-  console.log(`Bot server running on port ${PORT}`);
+// Напоминание за 2 часа до записи
+cron.schedule('0 * * * *', () => {
+  const now = new Date();
+  const inTwoHours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+  
+  bookings.forEach(booking => {
+    if (!booking.chatId) return;
+    
+    const bookingDateTime = new Date(`${booking.date}T${booking.time}`);
+    if (bookingDateTime.getTime() <= inTwoHours.getTime() && 
+        bookingDateTime.getTime() > now.getTime()) {
+      bot.sendMessage(booking.chatId, 
+        `⏰ Напоминание: через 2 часа у вас запись на "${booking.serviceName}"`
+      );
+    }
+  });
 });
+
+// Функция добавления записи (для фронтенда)
+function addBooking(booking) {
+  bookings.push(booking);
+  
+  // Уведомление администратору о новой записи
+  bot.sendMessage(ADMIN_ID, 
+    `📋 Новая запись!\n\n` +
+    `👤 Имя: ${booking.name}\n` +
+    `📞 Телефон: ${booking.phone}\n` +
+    `📅 Услуга: ${booking.serviceName}\n` +
+    `📆 Дата: ${booking.date}\n` +
+    `⏰ Время: ${booking.time}\n` +
+    `💳 Стоимость: ${booking.servicePrice} ₽\n\n` +
+    `ID записи: ${booking.id}`
+  );
+}
+
+// Экспортируем для фронтенда
+module.exports = { addBooking, bookings };

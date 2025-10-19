@@ -1,38 +1,29 @@
 const TelegramBot = require('node-telegram-bot-api');
 const cron = require('node-cron');
+const express = require('express');
 
 // Твой бот
 const TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
 const ADMIN_ID = 828439309;
 
-// Создаем бота с опциями для избежания конфликтов
-const bot = new TelegramBot(TOKEN, {
-  polling: {
-    interval: 300,
-    timeout: 10,
-    autoStart: true
-  }
-});
+const app = express();
+app.use(express.json());
+
+// Создаем бота без автоматического polling
+const bot = new TelegramBot(TOKEN);
 
 // Хранилище записей
 let bookings = [];
 let clients = {};
 
-// Обработчик ошибок polling
-bot.on('polling_error', (error) => {
-  console.log('Polling error:', error.code, error.message);
-  
-  // Если конфликт - ждем и перезапускаем
-  if (error.code === 'ETELEGRAM' && error.message.includes('409')) {
-    console.log('Обнаружен конфликт. Перезапуск через 10 секунд...');
-    setTimeout(() => {
-      bot.stopPolling();
-      setTimeout(() => {
-        bot.startPolling();
-        console.log('🔄 Бот перезапущен после конфликта');
-      }, 2000);
-    }, 10000);
-  }
+// Настройка webhook
+const WEBHOOK_URL = process.env.RENDER_EXTERNAL_URL || 'https://your-app-name.onrender.com';
+bot.setWebHook(`${WEBHOOK_URL}/bot${TOKEN}`);
+
+// Обработка webhook запросов от Telegram
+app.post(`/bot${TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
 });
 
 // Команда /start
@@ -98,7 +89,7 @@ bot.on('message', (msg) => {
   }
 });
 
-// Напоминание за день до записи
+// Напоминания (остаются такими же)
 cron.schedule('0 10 * * *', () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -113,7 +104,6 @@ cron.schedule('0 10 * * *', () => {
   });
 });
 
-// Напоминание за 2 часа до записи
 cron.schedule('0 * * * *', () => {
   const now = new Date();
   const inTwoHours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
@@ -131,11 +121,10 @@ cron.schedule('0 * * * *', () => {
   });
 });
 
-// Функция добавления записи (для фронтенда)
+// Функция добавления записи
 function addBooking(booking) {
   bookings.push(booking);
   
-  // Уведомление администратору о новой записи
   bot.sendMessage(ADMIN_ID, 
     `📋 Новая запись!\n\n` +
     `👤 Имя: ${booking.name}\n` +
@@ -148,7 +137,11 @@ function addBooking(booking) {
   );
 }
 
-// Экспортируем для фронтенда
-module.exports = { addBooking, bookings };
+// Запуск сервера
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Сервер запущен на порту ${PORT}`);
+  console.log(`🌐 Webhook установлен: ${WEBHOOK_URL}/bot${TOKEN}`);
+});
 
-console.log('🤖 Бот запущен и работает! Ожидаем сообщения...');
+module.exports = { addBooking, bookings };

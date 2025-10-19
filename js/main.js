@@ -26,7 +26,7 @@ confirmBtn.addEventListener('click', async () => {
 
   try {
     // Отправляем запись на сервер бота
-    const API_URL = 'https://your-app-name.onrender.com'; // Замените на ваш URL Render
+    const API_URL = 'https://salon-8lor.onrender.com'; // Замените на ваш URL Render
     
     const response = await fetch(`${API_URL}/api/book`, {
       method: 'POST',
@@ -55,3 +55,4 @@ confirmBtn.addEventListener('click', async () => {
     alert('Ошибка соединения с сервером. Пожалуйста, попробуйте позже.');
   }
 });
+

@@ -5,7 +5,7 @@ import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({ origin: '*' })); // разрешаем все домены
 app.use(bodyParser.json());
 
 // Telegram bot info
@@ -16,20 +16,17 @@ app.post('/new-booking', async (req, res) => {
   const { name, phone, date, time, serviceName, price } = req.body;
 
   if (!name || !phone || !date || !time || !serviceName) {
-    return res.status(400).json({ error: 'Missing fields' });
+    return res.status(400).json({ error: 'Заполните все поля' });
   }
 
   const message = `📌 Новая запись\nИмя: ${name}\nТелефон: ${phone}\nУслуга: ${serviceName}\nДата: ${date}\nВремя: ${time}\nСтоимость: ${price} ₽`;
 
   try {
-    // Используем встроенный fetch в Node 18+
+    // встроенный fetch в Node 18+
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: USER_ID,
-        text: message
-      })
+      body: JSON.stringify({ chat_id: USER_ID, text: message })
     });
 
     res.status(200).json({ success: true });

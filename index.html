@@ -749,6 +749,80 @@
       margin-bottom: 15px;
     }
     
+    /* Photo Upload */
+    .photo-upload {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .photo-upload h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+    }
+    
+    .upload-area {
+      border: 2px dashed rgba(212, 180, 131, 0.5);
+      border-radius: var(--radius);
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 15px;
+    }
+    
+    .upload-area:hover {
+      border-color: var(--accent);
+    }
+    
+    .upload-area i {
+      font-size: 40px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    
+    .upload-area p {
+      color: var(--text-light);
+    }
+    
+    #photo-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .preview-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 150px;
+    }
+    
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .preview-item .remove-photo {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    
     /* Responsive */
     @media (max-width: 992px) {
       .hero {
@@ -957,36 +1031,6 @@
                 <div class="service-duration">30 мин</div>
                 <div class="service-price">1 200 ₽</div>
               </div>
-              <div class="service-item">
-                <div class="service-name">Массаж лица Релакс | Классика</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж лица Классический</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж лица Скульптурный (Испанский)</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж лица, шеи, декольте по Жаке + Гуаша</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж Буккальный</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж ШВЗ</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">800 ₽</div>
-              </div>
             </div>
           </div>
         </div>
@@ -1035,61 +1079,6 @@
                 <div class="service-name">Массаж общий всего тела + лицо</div>
                 <div class="service-duration">1 ч 30 мин</div>
                 <div class="service-price">3 500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж рук + кисти</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж ног до колена + стопы</div>
-                <div class="service-duration">35 мин</div>
-                <div class="service-price">1 500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">ШВЗ + спина</div>
-                <div class="service-duration">50 мин</div>
-                <div class="service-price">1 800 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж классический всего тела + банки</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 600 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж спины + фотостимулятор мышц</div>
-                <div class="service-duration">1 ч</div>
-                <div class="service-price">2 100 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Стоунтерапия + ручной массаж всего тела</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Стоунтерапия + массаж спины</div>
-                <div class="service-duration">45 мин</div>
-                <div class="service-price">1 800 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж спины ручной + вакуум аппаратный</div>
-                <div class="service-duration">45 мин</div>
-                <div class="service-price">1 900 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж живота ручной + вакуум аппаратный</div>
-                <div class="service-duration">40 мин</div>
-                <div class="service-price">1 900 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж ягодиц + вакуум аппаратный</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">1 900 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Массаж ягодиц + лазерный липолиз</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">1 900 ₽</div>
               </div>
             </div>
           </div>
@@ -1144,86 +1133,6 @@
                 <div class="service-name">LED маска-фотомоложение</div>
                 <div class="service-duration">30 мин</div>
                 <div class="service-price">800 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Ударно-волновая терапия бёдер</div>
-                <div class="service-duration">20 мин</div>
-                <div class="service-price">500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Фотостимулятор мышц спины</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">600 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Роликовый массаж спины</div>
-                <div class="service-duration">20 мин</div>
-                <div class="service-price">500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Роликовый массаж бёдер</div>
-                <div class="service-duration">20 мин</div>
-                <div class="service-price">500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Прессотерапия живота</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Прессотерапия ног</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">RF-лифтинг шеи</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">RF-лифтинг декольте</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">RF-лифтинг тела (одна зона)</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Микротоки шеи</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Микротоки декольте</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Криотерапия (манипула) лица</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Криотерапия (манипула) шеи</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Криотерапия (манипула) декольте</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">1 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Криотерапия (манипула) лица + шеи + декольте</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Дарсонвализация по лицу по пудре</div>
-                <div class="service-duration">30 мин</div>
-                <div class="service-price">500 ₽</div>
               </div>
             </div>
           </div>
@@ -1288,26 +1197,6 @@
                 <div class="service-duration">25 мин</div>
                 <div class="service-price">300 ₽</div>
               </div>
-              <div class="service-item">
-                <div class="service-name">Чистка лица комбинированная</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 000 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Чистка лица механическая</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">1 500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Чистка лица Узи-лопатка (ультрозвуковая)</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">1 500 ₽</div>
-              </div>
-              <div class="service-item">
-                <div class="service-name">Чистка вакуумная</div>
-                <div class="service-duration">60 мин</div>
-                <div class="service-price">2 300 ₽</div>
-              </div>
             </div>
           </div>
         </div>
@@ -1362,6 +1251,17 @@
             <p>Результат чистки лица</p>
           </div>
         </div>
+      </div>
+      
+      <!-- Photo Upload Section -->
+      <div class="photo-upload">
+        <h3>Добавить фото в галерею</h3>
+        <div class="upload-area" id="upload-area">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Перетащите фото сюда или нажмите для загрузки</p>
+          <input type="file" id="photo-input" accept="image/*" multiple style="display: none;">
+        </div>
+        <div id="photo-preview"></div>
       </div>
     </div>
   </section>
@@ -1814,6 +1714,73 @@
         modal.style.display = 'none';
       }
     });
+    
+    // Photo upload functionality
+    const uploadArea = document.getElementById('upload-area');
+    const photoInput = document.getElementById('photo-input');
+    const photoPreview = document.getElementById('photo-preview');
+    
+    uploadArea.addEventListener('click', () => {
+      photoInput.click();
+    });
+    
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'var(--accent)';
+      uploadArea.style.backgroundColor = 'rgba(212, 180, 131, 0.05)';
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.style.borderColor = 'rgba(212, 180, 131, 0.5)';
+      uploadArea.style.backgroundColor = 'transparent';
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'rgba(212, 180, 131, 0.5)';
+      uploadArea.style.backgroundColor = 'transparent';
+      
+      const files = e.dataTransfer.files;
+      handleFiles(files);
+    });
+    
+    photoInput.addEventListener('change', (e) => {
+      const files = e.target.files;
+      handleFiles(files);
+    });
+    
+    function handleFiles(files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!file.type.match('image.*')) continue;
+        
+        const reader = new FileReader();
+        
+        reader.onload = (function(theFile) {
+          return function(e) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.title = theFile.name;
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-photo';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', function() {
+              previewItem.remove();
+            });
+            
+            previewItem.appendChild(img);
+            previewItem.appendChild(removeBtn);
+            photoPreview.appendChild(previewItem);
+          };
+        })(file);
+        
+        reader.readAsDataURL(file);
+      }
+    }
     
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav a').forEach(anchor => {

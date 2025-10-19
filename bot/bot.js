@@ -1,19 +1,18 @@
 // === bot.js ===
-// Telegram Bot + API бронирования с сохранением данных в файл
+// Telegram Bot + PostgreSQL хранение броней (Render-ready)
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
-const fs = require('fs');
-const path = require('path');
+const { Pool } = require('pg');
 
 // ======================
 // 🔧 Конфигурация
 // ======================
-const TOKEN = process.env.BOT_TOKEN; // Render Environment → BOT_TOKEN = 123456:ABC...
-const WEB_APP_URL = 'https://salon-8lor.onrender.com'; // твой render-домен
-const PORT = process.env.PORT || 3000;
-const BOOKINGS_FILE = path.join(__dirname, 'bookings.json');
+const TOKEN = process.env.BOT_TOKEN;
+const DATABASE_URL = process.env.DATABASE_URL;
+const WEB_APP_URL = 'https://salon-8lor.onrender.com';
+const PORT = process.env.PORT || 10000;
 
 // ======================
 // 🚀 Инициализация
@@ -21,53 +20,84 @@ const BOOKINGS_FILE = path.join(__dirname, 'bookings.json');
 const app = express();
 app.use(bodyParser.json());
 
-// Создаём бота (без polling)
+// Telegram Bot (через Webhook)
 const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${WEB_APP_URL}/bot${TOKEN}`);
 
-// ======================
-// 📂 Вспомогательные функции
-// ======================
-function loadBookings() {
-  try {
-    if (!fs.existsSync(BOOKINGS_FILE)) return {};
-    return JSON.parse(fs.readFileSync(BOOKINGS_FILE, 'utf8'));
-  } catch (err) {
-    console.error('Ошибка загрузки файла брони:', err);
-    return {};
-  }
-}
-
-function saveBookings(data) {
-  try {
-    fs.writeFileSync(BOOKINGS_FILE, JSON.stringify(data, null, 2), 'utf8');
-  } catch (err) {
-    console.error('Ошибка сохранения файла брони:', err);
-  }
-}
+// PostgreSQL подключение
+const pool = new Pool({
+  connectionString: DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
 // ======================
-// 📩 Маршрут для приёма брони с сайта
+// 🗄️ Создание таблицы при старте
+// ======================
+(async () => {
+  const client = await pool.connect();
+  await client.query(`
+    CREATE TABLE IF NOT EXISTS bookings (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      date TEXT NOT NULL,
+      time TEXT NOT NULL,
+      service_name TEXT NOT NULL,
+      service_price TEXT NOT NULL,
+      service_duration TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
+  client.release();
+  console.log('📦 Таблица bookings готова');
+})();
+
+// ======================
+// 📩 API: создать бронь
 // ======================
 app.post('/api/book', async (req, res) => {
   try {
-    const booking = req.body;
+    const b = req.body;
 
-    if (!booking || !booking.id || !booking.name || !booking.phone) {
-      console.log('❌ Некорректные данные брони:', booking);
-      return res.status(400).json({ success: false, error: 'Некорректные данные брони' });
+    if (!b.id || !b.name || !b.phone || !b.date || !b.time) {
+      return res.status(400).json({ success: false, error: 'Неверные данные' });
     }
 
-    const bookings = loadBookings();
-    bookings[booking.id] = booking;
-    saveBookings(bookings);
+    const client = await pool.connect();
 
-    console.log('📅 Новая бронь сохранена:', booking);
+    // Проверяем занятость времени
+    const check = await client.query(
+      'SELECT id FROM bookings WHERE date = $1 AND time = $2 LIMIT 1',
+      [b.date, b.time]
+    );
+    if (check.rows.length > 0) {
+      client.release();
+      return res.json({ success: false, error: 'Это время уже занято' });
+    }
 
-    res.json({ success: true, bookingId: booking.id });
-  } catch (error) {
-    console.error('❌ Ошибка при сохранении брони:', error);
-    res.status(500).json({ success: false, error: 'Ошибка сервера при бронировании' });
+    // Добавляем бронь
+    await client.query(
+      `INSERT INTO bookings (id, name, phone, date, time, service_name, service_price, service_duration)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+      [
+        b.id,
+        b.name,
+        b.phone,
+        b.date,
+        b.time,
+        b.serviceName,
+        b.servicePrice,
+        b.serviceDuration || '60'
+      ]
+    );
+
+    client.release();
+    console.log('✅ Сохранена новая бронь:', b);
+
+    res.json({ success: true, bookingId: b.id });
+  } catch (err) {
+    console.error('❌ Ошибка при бронировании:', err);
+    res.status(500).json({ success: false, error: 'Ошибка сервера' });
   }
 });
 
@@ -80,53 +110,49 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 });
 
 // ======================
-// 💬 Обработка /start <bookingId>
+// 💬 /start <bookingId>
 // ======================
-bot.onText(/\/start(?:\s+(.+))?/, (msg, match) => {
+bot.onText(/\/start(?:\s+(.+))?/, async (msg, match) => {
   const chatId = msg.chat.id;
   const bookingId = match[1];
 
   if (!bookingId) {
-    bot.sendMessage(
+    return bot.sendMessage(
       chatId,
-      '👋 Добро пожаловать! Это бот косметолога Надежды.\n' +
-      'Вы можете оформить запись через сайт и получить подтверждение здесь.'
+      '👋 Привет! Это бот косметолога Надежды.\nОформите запись на сайте, чтобы получить подтверждение здесь.'
     );
-    return;
   }
 
-  const bookings = loadBookings();
-  const booking = bookings[bookingId];
+  try {
+    const client = await pool.connect();
+    const { rows } = await client.query('SELECT * FROM bookings WHERE id = $1', [bookingId]);
+    client.release();
 
-  if (!booking) {
-    bot.sendMessage(
-      chatId,
-      '❌ Запись не найдена. Возможно, срок действия ссылки истёк или данные не дошли до сервера.'
-    );
-    console.log('⚠️ Не найдена бронь с ID:', bookingId);
-    return;
+    if (rows.length === 0) {
+      return bot.sendMessage(chatId, '❌ Запись не найдена.');
+    }
+
+    const b = rows[0];
+    const msgText =
+      `✅ *Ваша запись подтверждена!*\n\n` +
+      `👩‍💼 *Имя:* ${b.name}\n` +
+      `📞 *Телефон:* ${b.phone}\n` +
+      `📅 *Дата:* ${b.date}\n` +
+      `⏰ *Время:* ${b.time}\n` +
+      `💆‍♀️ *Услуга:* ${b.service_name}\n` +
+      `💰 *Цена:* ${b.service_price} ₽`;
+
+    bot.sendMessage(chatId, msgText, { parse_mode: 'Markdown' });
+  } catch (err) {
+    console.error('Ошибка при загрузке брони:', err);
+    bot.sendMessage(chatId, '⚠️ Ошибка при получении данных. Попробуйте позже.');
   }
-
-  const message =
-    `✅ *Ваша запись подтверждена!*\n\n` +
-    `👩‍💼 *Имя:* ${booking.name}\n` +
-    `📞 *Телефон:* ${booking.phone}\n` +
-    `📅 *Дата:* ${booking.date}\n` +
-    `⏰ *Время:* ${booking.time}\n` +
-    `💆‍♀️ *Услуга:* ${booking.serviceName}\n` +
-    `💰 *Цена:* ${booking.servicePrice} ₽\n\n` +
-    `Спасибо, что выбрали косметолога Надежду 🌸`;
-
-  bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
-  console.log(`📨 Отправлено подтверждение для ${booking.name}`);
 });
 
 // ======================
-// 🕒 Тестовый маршрут
+// 🧠 Тестовый маршрут
 // ======================
-app.get('/', (req, res) => {
-  res.send('✅ Telegram Bot работает. API: /api/book');
-});
+app.get('/', (_, res) => res.send('✅ Telegram Bot с PostgreSQL работает'));
 
 // ======================
 // 🚀 Запуск сервера

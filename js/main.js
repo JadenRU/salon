@@ -1,56 +1,57 @@
-const dateInput=document.getElementById('date');
-const timesEl=document.getElementById('times');
-const confirmBtn=document.getElementById('confirm-book');
-const serviceRows=document.querySelectorAll('#services-table tr');
+confirmBtn.addEventListener('click', async () => {
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const date = dateInput.value;
+  const time = document.querySelector('.time-slot.selected')?.textContent;
+  const serviceOption = serviceSelect.options[serviceSelect.selectedIndex];
+  const serviceName = serviceOption.text;
+  const servicePrice = serviceOption.value;
+  const serviceDuration = serviceOption.dataset.duration;
+  
+  if (!name || !phone || !date || !time || !servicePrice) {
+    alert('Пожалуйста, заполните все поля формы и выберите время');
+    return;
+  }
 
-function getSlotsForDate(dateStr){
-  if(!dateStr) return [];
-  const date=new Date(dateStr+'T00:00:00'); if(date.getDay()===0) return [];
-  const slots=[];
-  for(let h=10;h<18;h++){slots.push(`${String(h).padStart(2,'0')}:00`); slots.push(`${String(h).padStart(2,'0')}:30`);}
-  // TODO: здесь можно блокировать занятые слоты
-  return slots;
-}
+  const booking = {
+    id: Date.now(),
+    name,
+    phone,
+    date,
+    time,
+    serviceName,
+    servicePrice,
+    serviceDuration
+  };
 
-function renderSlots(){
-  timesEl.innerHTML='';
-  const slots=getSlotsForDate(dateInput.value);
-  if(slots.length===0){ timesEl.innerHTML='<div class="tiny muted">Нет доступных слотов.</div>'; return;}
-  slots.forEach(s=>{
-    const btn=document.createElement('button'); btn.type='button'; btn.className='slot'; btn.textContent=s;
-    btn.addEventListener('click', ()=>{document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected')); btn.classList.add('selected');});
-    timesEl.appendChild(btn);
-  });
-}
+  try {
+    // Отправляем запись на сервер бота
+    const API_URL = 'https://your-app-name.onrender.com'; // Замените на ваш URL Render
+    
+    const response = await fetch(`${API_URL}/api/book`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking)
+    });
 
-dateInput.addEventListener('change', renderSlots);
-dateInput.min=new Date().toISOString().split('T')[0];
-
-confirmBtn.addEventListener('click', async ()=>{
-  const name=document.getElementById('client-name').value.trim();
-  const phone=document.getElementById('client-phone').value.trim();
-  const date=dateInput.value;
-  const time=document.querySelector('.slot.selected')?.textContent;
-  const selectedRow=document.querySelector('#services-table tr.selected') || document.querySelector('#services-table tr');
-  const serviceName=selectedRow.children[0].textContent;
-  const price=Number(selectedRow.children[2].textContent.replace(/\D/g,''));
-  if(!name||!phone||!date||!time){alert('Заполните все поля'); return;}
-  const booking={id:Date.now(), name, phone, date, time, serviceName, price};
-
-  await fetch('/api/book',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(booking)
-  });
-
-  window.open(`https://t.me/NadezhdaBeauty_Bot?start=${booking.id}`,'_blank');
-  alert('Запись подтверждена! Чат с ботом открыт.');
-});
-
-// выбор услуги
-serviceRows.forEach(row=>{
-  row.addEventListener('click', ()=>{
-    serviceRows.forEach(r=>r.classList.remove('selected'));
-    row.classList.add('selected');
-  });
+    const result = await response.json();
+    
+    if (result.success) {
+      // Открываем бота с ID записи
+      const botUrl = `https://t.me/NadezhdaBeauty_Bot?start=${booking.id}`;
+      window.open(botUrl, '_blank');
+      
+      // Показываем сообщение об успехе
+      alert('Запись отправлена! Открыт чат с ботом для подтверждения.');
+      
+      // Сбрасываем форму
+      document.getElementById('booking-form').reset();
+      generateTimeSlots();
+    } else {
+      alert('Ошибка при отправке записи: ' + result.error);
+    }
+  } catch (error) {
+    console.error('Ошибка:', error);
+    alert('Ошибка соединения с сервером. Пожалуйста, попробуйте позже.');
+  }
 });

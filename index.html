@@ -1,400 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Косметолог — Гнатюк Надежда Георгиевна</title>
-  <meta name="description" content="Эстетичный лендинг косметолога: портфолио, прайс, онлайн-запись, отзывы и контакты.">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Гнатюк Надежда Георгиевна — косметолог</title>
   <style>
-    :root{
-      --bg: #fffaf9;
-      --muted: #9b8f8a;
-      --accent: #d4b483;
-      --soft: #f6eef0;
-      --card: #fff;
-      --radius: 16px;
-      --max-width: 1100px;
-      --shadow: 0 6px 20px rgba(24,20,18,0.08);
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffafc;
+      color: #333;
+      margin: 0;
+      padding: 0;
     }
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; margin:0; background:var(--bg); color:#2b2b2b; -webkit-font-smoothing:antialiased}
-    a{color:inherit}
-    .container{max-width:var(--max-width); margin:0 auto; padding:24px}
-
-    /* HERO */
-    .hero{display:grid; grid-template-columns:1fr 420px; gap:32px; align-items:center; padding:28px;}
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95)); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px}
-    .brand{display:flex; align-items:center; gap:12px}
-    .logo{width:64px; height:64px; border-radius:14px; background:linear-gradient(135deg,var(--soft),#fff); display:flex; align-items:center; justify-content:center; font-family:Playfair Display; font-size:22px; color:var(--accent); border:1px solid rgba(0,0,0,0.04)}
-    h1{font-family:Playfair Display, serif; font-size:34px; margin:18px 0 8px}
-    p.lead{color:var(--muted); margin:0 0 18px}
-    .cta-row{display:flex; gap:12px; align-items:center}
-    .btn{background:var(--accent); color:#fff; padding:12px 18px; border-radius:12px; border:none; cursor:pointer; font-weight:600; box-shadow:0 6px 18px rgba(212,180,131,0.25)}
-    .btn-outline{background:transparent; border:1px solid rgba(43,43,43,0.07); padding:10px 16px}
-    .hero-photo{border-radius:20px; overflow:hidden; box-shadow:var(--shadow);}
-    .hero-photo img{display:block; width:100%; height:100%; object-fit:cover}
-
-    /* Quick info */
-    .quick{display:flex; gap:12px; margin-top:18px}
-    .pill{background:rgba(212,180,131,0.12); padding:8px 12px; border-radius:999px; font-weight:600; color:var(--accent)}
-
-    /* TWO COLUMNS BELOW HERO */
-    .grid-2{display:grid; grid-template-columns:1fr 380px; gap:28px; margin-top:28px}
-
-    /* Gallery */
-    .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-    .gallery figure{margin:0; border-radius:12px; overflow:hidden; background:#fff; box-shadow:var(--shadow)}
-    .gallery img{width:100%; height:220px; object-fit:cover; display:block}
-    .before-after{position:relative}
-    .ba-handle{position:absolute; left:50%; top:0; bottom:0; width:3px; background:linear-gradient(#fff0, rgba(0,0,0,.06)); transform:translateX(-50%);}
-
-    /* Services table */
-    .card{background:var(--card); border-radius:14px; padding:18px; box-shadow:var(--shadow)}
-    table{width:100%; border-collapse:collapse}
-    th,td{padding:10px 8px; text-align:left}
-    th{font-weight:600; color:var(--muted)}
-    td.price{font-weight:700; text-align:right}
-
-    /* Booking */
-    .booking{display:flex; flex-direction:column; gap:12px}
-    .input, select{padding:10px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); background:#fff}
-    .slots{display:flex; gap:8px; flex-wrap:wrap}
-    .slot{padding:8px 10px; border-radius:10px; border:1px dashed rgba(0,0,0,0.06); cursor:pointer}
-    .slot.selected{background:var(--accent); color:#fff; border-style:solid}
-
-    /* Reviews */
-    .reviews{display:flex; flex-direction:column; gap:12px}
-    .review{padding:12px; border-radius:12px; background:linear-gradient(180deg,#fff,#fffaf7); box-shadow:var(--shadow)}
-
-    /* Certificates */
-    .certs{display:flex; gap:12px; flex-wrap:wrap}
-    .cert{width:120px; height:80px; border-radius:8px; overflow:hidden; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow)}
-
-    /* Footer */
-    footer{margin-top:28px; padding:22px; text-align:center; color:var(--muted)}
-
-    /* Responsive */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .grid-2{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
+    header {
+      background-color: #fdeef3;
+      text-align: center;
+      padding: 40px 20px;
     }
-    @media (max-width:560px){
-      .gallery img{height:160px}
-      h1{font-size:26px}
-      .hero-card{padding:18px}
-      .logo{width:52px;height:52px}
+    header h1 {
+      color: #b77b94;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
-
-    /* Micro interactions */
-    .tiny{font-size:13px;color:var(--muted)}
-    .muted{color:var(--muted)}
+    header p {
+      color: #8e6a7b;
+      font-size: 1.1em;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h2 {
+      color: #b77b94;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border-bottom: 1px solid #e7d7df;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #fce8ef;
+      color: #b77b94;
+    }
+    button {
+      background-color: #b77b94;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #a86f89;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    input, select {
+      padding: 10px;
+      border: 1px solid #e7d7df;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    footer {
+      text-align: center;
+      background-color: #fdeef3;
+      padding: 20px;
+      color: #8e6a7b;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-card">
-        <div class="brand">
-          <div class="logo">Н</div>
-          <div>
-            <div class="tiny muted">Косметологический сервис</div>
-            <div style="font-weight:700">Гнатюк Надежда Георгиевна — Косметолог</div>
-          </div>
-        </div>
+  <header>
+    <h1>Гнатюк Надежда Георгиевна</h1>
+    <p>Профессиональный косметолог — забота о вашей коже с любовью 💖</p>
+  </header>
 
-        <h1>Эстетичный уход за лицом & телом — безопасно, деликатно, красиво</h1>
-        <p class="lead">Профессиональные косметологические процедуры: уход, коррекция, лечебные процедуры. Комфорт, стерильность и индивидуальная программа.</p>
-
-        <div class="quick">
-          <div class="pill">Опыт 8 лет</div>
-          <div class="pill">Сертифицировано</div>
-          <div class="pill">Гарантия результата</div>
-        </div>
-
-        <div style="margin-top:18px" class="cta-row">
-          <button class="btn" id="book-now">Записаться</button>
-          <button class="btn-outline" id="view-works">Портфолио</button>
-          <a class="btn-outline" href="#contacts">Контакты</a>
-        </div>
-
-        <p class="tiny muted" style="margin-top:12px">Работаю по безопасным протоколам стерилизации. После процедуры — памятка по уходу.</p>
-      </div>
-
-      <div class="hero-photo">
-        <img src="" alt="Фото мастера">
-      </div>
-    </section>
-
-    <!-- GRID: gallery + booking -->
-    <div class="grid-2">
-      <div>
-        <div class="card">
-          <h3 style="margin-top:0">Галерея работ</h3>
-          <div class="gallery" id="gallery">
-            <figure><img src="https://images.unsplash.com/photo-1543168257-7a62f2a8dd6d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="work"></figure>
-            <figure class="before-after"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="before-after"><div class="ba-handle"></div></figure>
-            <figure><img src="https://images.unsplash.com/photo-1584270354949-0d7c7c5a2e22?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="work"></figure>
-            <figure><img src="https://images.unsplash.com/photo-1602810318270-6b74f0c5d4f1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="work"></figure>
-            <figure><img src="https://images.unsplash.com/photo-1556228722-6db5e8a5e5ff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="work"></figure>
-            <figure><img src="https://images.unsplash.com/photo-1600180758890-6d05b3e1c2c6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="work"></figure>
-          </div>
-          <p class="tiny muted" style="margin-top:8px">Карусель можно заменить реальными фото из портфолио. Подписи: услуга — время — использованные материалы.</p>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <h3 style="margin-top:0">Отзывы</h3>
-          <div class="reviews" id="reviews">
-            <div class="review"><strong>Анна</strong> — 5★<div class="tiny muted">«Очень аккуратно, приятная атмосфера. Рекомендую!»</div></div>
-            <div class="review"><strong>Ольга</strong> — 5★<div class="tiny muted">«Помогла с программой ухода, заметный результат»</div></div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <h3 style="margin-top:0">Сертификаты и образование</h3>
-          <div class="certs">
-            <div class="cert">Сертификат 1</div>
-            <div class="cert">Сертификат 2</div>
-            <div class="cert">Курс по косметологии</div>
-          </div>
-        </div>
-      </div>
-
-      <aside>
-        <div class="card">
-          <h3 style="margin-top:0">Услуги и цены</h3>
-          <table>
-            <thead><tr><th>Услуга</th><th class="muted">Время</th><th class="muted">Цена</th></tr></thead>
-            <tbody id="services-table">
-              <tr><td>Консультация и уход за лицом</td><td>45 мин</td><td class="price">1500 ₽</td></tr>
-              <tr><td>Комбинированная чистка лица</td><td>60 мин</td><td class="price">3000 ₽</td></tr>
-              <tr><td>Биоревитализация (консультация)</td><td>30 мин</td><td class="price">—</td></tr>
-              <tr><td>Пилинг</td><td>45 мин</td><td class="price">2500 ₽</td></tr>
-              <tr><td>Курс процедур (3 сеанса)</td><td>—</td><td class="price">от 7000 ₽</td></tr>
-            </tbody>
-          </table>
-
-          <hr style="margin:12px 0">
-          <div style="font-weight:600">Предварительный расчёт</div>
-          <div style="display:flex; gap:8px; margin-top:8px" class="booking">
-            <select id="service-select" class="input">
-              <option value="1500" data-name="Консультация и уход за лицом">Консультация — 1500 ₽</option>
-              <option value="3000" data-name="Комбинированная чистка лица">Чистка — 3000 ₽</option>
-              <option value="2500" data-name="Пилинг">Пилинг — 2500 ₽</option>
-              <option value="7000" data-name="Курс 3 сеанса">Курс — 7000 ₽</option>
-            </select>
-            <input type="number" id="qty" class="input" value="1" min="1" style="width:90px">
-            <div style="align-self:center; font-weight:700" id="total">Итого: 1500 ₽</div>
-          </div>
-
-          <hr style="margin:12px 0">
-          <div style="font-weight:600; margin-bottom:6px">Онлайн-запись</div>
-          <div class="booking">
-            <input id="client-name" class="input" placeholder="Ваше имя">
-            <input id="client-phone" class="input" placeholder="Телефон (+7...)">
-            <input id="date" type="date" class="input">
-            <div id="times" class="slots"></div>
-            <div style="display:flex; gap:8px; margin-top:6px">
-              <button class="btn" id="confirm-book">Подтвердить</button>
-              <button class="btn-outline" id="contact-whatsapp">WhatsApp</button>
-            </div>
-            <div class="tiny muted">После записи вы получите напоминание и .ics файл для календаря.</div>
-          </div>
-
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <h3 style="margin-top:0">Контакты</h3>
-          <div class="tiny muted">Кабинет: ул. Примерная, 10 • Москва</div>
-          <div style="margin-top:8px">Телефон: <a href="tel:+71234567890">+7 (123) 456-78-90</a></div>
-          <div style="margin-top:8px">Telegram: <a id="tg-link" href="#">@nadia_cosmetolog</a></div>
-          <div style="margin-top:10px"><a href="https://www.google.com/maps" target="_blank">Показать на карте</a></div>
-        </div>
-      </aside>
+  <section id="gallery">
+    <h2>Портфолио работ</h2>
+    <div class="gallery">
+      <img src="https://placehold.co/600x400/pink/white?text=Работа+1" alt="Работа 1">
+      <img src="https://placehold.co/600x400/pink/white?text=Работа+2" alt="Работа 2">
     </div>
+  </section>
 
-    <footer id="contacts"> 
-      <div class="tiny muted">© 2025 Гнатюк Надежда Георгиевна — косметолог • Все права защищены</div>
-    </footer>
-  </div>
+  <section id="services">
+    <h2>Услуги и цены</h2>
+    <table>
+      <tr><th>Услуга</th><th>Цена</th></tr>
+      <tr><td>Чистка лица</td><td>1800 ₽</td></tr>
+      <tr><td>Пилинг</td><td>1500 ₽</td></tr>
+      <tr><td>Массаж лица</td><td>1200 ₽</td></tr>
+    </table>
+  </section>
+
+  <section id="booking">
+    <h2>Онлайн-запись</h2>
+    <form id="bookingForm">
+      <input type="text" id="name" placeholder="Ваше имя" required>
+      <input type="tel" id="phone" placeholder="Телефон" required>
+      <select id="service" required>
+        <option value="">Выберите услугу</option>
+        <option value="Чистка лица">Чистка лица</option>
+        <option value="Пилинг">Пилинг</option>
+        <option value="Массаж лица">Массаж лица</option>
+      </select>
+      <input type="date" id="date" required>
+      <input type="time" id="time" required>
+      <button type="submit">Записаться</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Гнатюк Надежда Георгиевна — косметолог</p>
+  </footer>
 
   <script>
-    // --- Services price calc ---
-    const serviceSelect = document.getElementById('service-select');
-    const qty = document.getElementById('qty');
-    const totalEl = document.getElementById('total');
-    function updateTotal(){
-      const price = Number(serviceSelect.value || 0);
-      const q = Math.max(1, Number(qty.value || 1));
-      totalEl.textContent = `Итого: ${price * q} ₽`;
-    }
-    serviceSelect.addEventListener('change', updateTotal);
-    qty.addEventListener('input', updateTotal);
-    updateTotal();
+    const form = document.getElementById('bookingForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    // --- Time slot generator ---
-    const timesEl = document.getElementById('times');
-    const dateInput = document.getElementById('date');
-    const confirmBtn = document.getElementById('confirm-book');
-    const bookNow = document.getElementById('book-now');
-    const viewWorks = document.getElementById('view-works');
+      const booking = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        serviceName: document.getElementById('service').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        price: document.querySelector(`#service option:checked`).textContent.includes('Чистка') ? 1800 :
+               document.querySelector(`#service option:checked`).textContent.includes('Пилинг') ? 1500 : 1200
+      };
 
-    function getSlotsForDate(dateStr){
-      if(!dateStr) return [];
-      const date = new Date(dateStr + 'T00:00:00');
-      const day = date.getDay();
-      if(day === 0) return [];
-      const slots = [];
-      for(let h=10; h<18; h++){
-        slots.push(`${String(h).padStart(2,'0')}:00`);
-        slots.push(`${String(h).padStart(2,'0')}:30`);
-      }
-      return slots;
-    }
+      alert(`Спасибо, ${booking.name}! Ваша запись принята.`);
 
-    function renderSlots(){
-      timesEl.innerHTML = '';
-      const slots = getSlotsForDate(dateInput.value);
-      if(slots.length===0){ timesEl.innerHTML = '<div class="tiny muted">Нет доступных слотов на выбранную дату.</div>'; return }
-      slots.forEach(s=>{
-        const btn = document.createElement('button');
-        btn.type='button'; btn.className='slot'; btn.textContent=s;
-        btn.addEventListener('click', ()=>{
-          document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected'));
-          btn.classList.add('selected');
-        });
-        timesEl.appendChild(btn);
+      sendToTelegram(booking);
+    });
+
+    function sendToTelegram(booking) {
+      const token = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI'; // вставь токен бота
+      const chatId = '828439309';  // вставь свой chat_id
+      const text = `🧴 Новая запись!\n\nИмя: ${booking.name}\nТелефон: ${booking.phone}\nУслуга: ${booking.serviceName}\nДата: ${booking.date} ${booking.time}\nЦена: ${booking.price} ₽`;
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text })
       })
+      .then(res => res.json())
+      .then(data => console.log('Уведомление отправлено в Telegram:', data))
+      .catch(err => console.error('Ошибка Telegram:', err));
     }
-    dateInput.addEventListener('change', renderSlots);
-
-    bookNow.addEventListener('click', ()=>{ dateInput.focus(); window.scrollTo({top:document.getElementById('date').getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'})});
-    viewWorks.addEventListener('click', ()=>{ window.scrollTo({top:document.getElementById('gallery').getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'})});
-
-    // --- Booking confirm ---
-    confirmBtn.addEventListener('click', async ()=>{
-      const name = document.getElementById('client-name').value.trim();
-      const phone = document.getElementById('client-phone').value.trim();
-      const date = dateInput.value;
-      const time = document.querySelector('.slot.selected')?.textContent;
-      const serviceName = serviceSelect.options[serviceSelect.selectedIndex].dataset.name;
-      if(!name || !phone || !date || !time){
-        alert('Пожалуйста, заполните имя, телефон, дату и выберите время.');
-        return;
-      }
-      const price = Number(serviceSelect.value) * Math.max(1, Number(qty.value||1));
-
-      const booking = {id:Date.now(), name, phone, date, time, serviceName, price};
-      const bookings = JSON.parse(localStorage.getItem('bookings')||'[]');
-      bookings.push(booking); localStorage.setItem('bookings', JSON.stringify(bookings));
-
-      // generate ICS
-      const ics = generateICS(booking);
-      downloadFile(ics, `${booking.serviceName.replace(/\s+/g,'_')}_${booking.date}.ics`, 'text/calendar');
-
-      // Try to send to serverless notify endpoint (if deployed)
-      try {
-        // Adjust URL to your deployed function (see README below)
-        await fetch('/.netlify/functions/notify', {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify(booking)
-        });
-      } catch(e){
-        // ignore if endpoint not present
-      }
-
-      // WhatsApp quick open (click-to-chat)
-      const waText = encodeURIComponent(`Здравствуйте, меня зовут ${name}. Хочу записаться на ${serviceName} на ${date} в ${time}. Телефон: ${phone}.`);
-      const waUrl = `https://wa.me/71234567890?text=${waText}`;
-
-      if(confirm('Запись сохранена. Хотите открыть WhatsApp для отправки подтверждения?')){
-        window.open(waUrl, '_blank');
-      } else {
-        alert('Запись подтверждена. .ics файл скачан. Если настроен Telegram-уведомитель, вы получите сообщение.');
-      }
-    });
-
-    // === УВЕДОМЛЕНИЕ В TELEGRAM ===
-function sendToTelegram(booking) {
-  const token = "8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI"; // токен твоего бота
-  const chatId = "828439309";  // твой Telegram ID
-  const text = `🧴 Новая запись!\n\nИмя: ${booking.name}\nТелефон: ${booking.phone}\nУслуга: ${booking.serviceName}\nДата: ${booking.date} ${booking.time}\nЦена: ${booking.price} ₽`;
-
-  fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text })
-  })
-  .then(res => res.json())
-  .then(data => console.log("Уведомление отправлено:", data))
-  .catch(err => console.error("Ошибка Telegram:", err));
-}
-
-
-    // WhatsApp button
-    document.getElementById('contact-whatsapp').addEventListener('click', ()=>{
-      const pre = encodeURIComponent('Здравствуйте! Хочу записаться.');
-      window.open('https://wa.me/?text='+pre, '_blank');
-    });
-    document.getElementById('tg-link').addEventListener('click', (e)=>{ e.preventDefault(); window.open('https://t.me/nadia_cosmetolog', '_blank'); });
-
-    // ICS generator
-    function toDateTimeLocal(dateStr, timeStr){
-      const [y,m,d] = dateStr.split('-');
-      const [hh,mm] = timeStr.split(':');
-      return `${y}${m}${d}T${hh}${mm}00`;
-    }
-    function escapeICSText(t){ return t.replace(/,/g,'\\,').replace(/\n/g,'\\n') }
-    function generateICS(b){
-      const start = toDateTimeLocal(b.date, b.time);
-      const endDate = new Date(b.date + 'T' + b.time + ':00'); endDate.setMinutes(endDate.getMinutes()+60);
-      const pad = n=>String(n).padStart(2,'0');
-      const end = `${endDate.getFullYear()}${pad(endDate.getMonth()+1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
-      return `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTAMP:${start}Z\nDTSTART:${start}Z\nDTEND:${end}Z\nSUMMARY:${escapeICSText(b.serviceName)}\nDESCRIPTION:${escapeICSText('Клиент: '+b.name+'; Тел: '+b.phone)}\nEND:VEVENT\nEND:VCALENDAR`;
-    }
-    function downloadFile(data, filename, mime){
-      const blob = new Blob([data], {type: mime});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    }
-
-    // Notifications demo
-    function askNotificationPermission(booking){
-      if(!('Notification' in window)) return;
-      if(Notification.permission === 'granted') scheduleNotification(booking);
-      else if(Notification.permission !== 'denied'){
-        Notification.requestPermission().then(permission=>{ if(permission==='granted') scheduleNotification(booking); });
-      }
-    }
-    function scheduleNotification(b){
-      setTimeout(()=>{ new Notification('Напоминание о записи', {body:`${b.serviceName} — ${b.date} ${b.time}`}); }, 10000);
-    }
-
-    // Lightbox & before/after
-    document.getElementById('gallery').addEventListener('click', (e)=>{
-      const img = e.target.closest('img'); if(!img) return;
-      const overlay = document.createElement('div'); overlay.style.position='fixed'; overlay.style.inset=0; overlay.style.background='rgba(0,0,0,0.6)'; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center'; overlay.style.zIndex=9999; overlay.addEventListener('click', ()=>overlay.remove());
-      const full = document.createElement('img'); full.src = img.src; full.style.maxWidth='96%'; full.style.maxHeight='90%'; full.style.borderRadius='12px'; overlay.appendChild(full);
-      document.body.appendChild(overlay);
-    });
-    document.querySelectorAll('.before-after').forEach(el=>{
-      el.addEventListener('mousemove', (e)=>{
-        const rect = el.getBoundingClientRect(); const pct = (e.clientX - rect.left) / rect.width; const img = el.querySelector('img'); img.style.clipPath = `inset(0 ${100-(pct*100)}% 0 0)`;
-      });
-      el.addEventListener('mouseleave', ()=>{ el.querySelector('img').style.clipPath='none'; });
-    });
-
-    // Init: set min date to today
-    const today = new Date();
-    const yyyy = today.getFullYear(); const mm = String(today.getMonth()+1).padStart(2,'0'); const dd = String(today.getDate()).padStart(2,'0');
-    dateInput.min = `${yyyy}-${mm}-${dd}`;
-    dateInput.value = dateInput.min; renderSlots();
   </script>
 </body>
 </html>

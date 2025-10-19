@@ -237,66 +237,90 @@
       background-color: var(--white);
     }
     
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+    .accordion {
+      max-width: 800px;
+      margin: 0 auto;
     }
     
-    .service-card {
-      background-color: var(--white);
+    .accordion-item {
+      margin-bottom: 15px;
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: var(--transition);
     }
     
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-    }
-    
-    .service-image {
-      height: 200px;
-      overflow: hidden;
-    }
-    
-    .service-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-    
-    .service-card:hover .service-image img {
-      transform: scale(1.05);
-    }
-    
-    .service-content {
-      padding: 25px;
-    }
-    
-    .service-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    
-    .service-description {
-      color: var(--text-light);
-      margin-bottom: 20px;
-      font-size: 15px;
-    }
-    
-    .service-price {
+    .accordion-header {
+      padding: 20px 25px;
+      background-color: var(--white);
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: var(--transition);
     }
     
-    .price {
-      font-weight: 700;
+    .accordion-header:hover {
+      background-color: rgba(212, 180, 131, 0.05);
+    }
+    
+    .accordion-header.active {
+      background-color: rgba(212, 180, 131, 0.1);
+    }
+    
+    .accordion-title {
+      font-family: 'Playfair Display', serif;
       font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .accordion-icon {
+      transition: var(--transition);
+    }
+    
+    .accordion-header.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: var(--white);
+    }
+    
+    .accordion-content.active {
+      max-height: 1000px;
+    }
+    
+    .service-list {
+      padding: 0 25px 20px;
+    }
+    
+    .service-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .service-item:last-child {
+      border-bottom: none;
+    }
+    
+    .service-name {
+      flex: 1;
+    }
+    
+    .service-duration {
+      width: 100px;
+      text-align: center;
+      color: var(--text-light);
+    }
+    
+    .service-price {
+      width: 120px;
+      text-align: right;
+      font-weight: 600;
       color: var(--accent);
     }
     
@@ -754,10 +778,6 @@
         font-size: 36px;
       }
       
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      
       .time-slots {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -810,6 +830,16 @@
       
       .footer-container {
         grid-template-columns: 1fr;
+      }
+      
+      .service-item {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .service-duration, .service-price {
+        width: 100%;
+        text-align: left;
       }
     }
   </style>
@@ -872,45 +902,223 @@
     <div class="container">
       <h2 class="section-title">Мои услуги</h2>
       
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Маникюр">
+      <div class="accordion">
+        <!-- Массажи -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Массажи</div>
+            <div class="accordion-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
           </div>
-          <div class="service-content">
-            <h3 class="service-title">Комплексный маникюр</h3>
-            <p class="service-description">Аппаратный, обрезной, комбинированный маникюр с покрытием гель-лаком</p>
-            <div class="service-price">
-              <span class="price">1200 ₽</span>
-              <span>60 мин</span>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item">
+                <div class="service-name">Массаж лица</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж спины</div>
+                <div class="service-duration">45 мин</div>
+                <div class="service-price">3 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж всего тела</div>
+                <div class="service-duration">1ч 30 мин</div>
+                <div class="service-price">5 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж головы</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж классический всего тела</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж живота ручной</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж ягодиц</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 200 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж бёдер</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 200 ₽</div>
+              </div>
             </div>
           </div>
         </div>
         
-        <div class="service-card">
-          <div class="service-image">
-            <img src="https://images.unsplash.com/photo-1607778833979-4f617513f36c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Педикюр">
+        <!-- Комплексные программы -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Комплексные программы</div>
+            <div class="accordion-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
           </div>
-          <div class="service-content">
-            <h3 class="service-title">Педикюр + уход за стопами</h3>
-            <p class="service-description">Аппаратная обработка стоп, удаление омозолелостей, покрытие гель-лаком</p>
-            <div class="service-price">
-              <span class="price">2200 ₽</span>
-              <span>90 мин</span>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item">
+                <div class="service-name">Комплекс спина + лицо</div>
+                <div class="service-duration">1ч 15 мин</div>
+                <div class="service-price">5 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Комплекс всего тела + лицо</div>
+                <div class="service-duration">2 ч</div>
+                <div class="service-price">7 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица + RF-лифтинг лица, шеи</div>
+                <div class="service-duration">1 ч</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица + Микротоки лица, шеи</div>
+                <div class="service-duration">1 ч</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица + Альгинатная маска</div>
+                <div class="service-duration">1 ч</div>
+                <div class="service-price">2 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж спины + лицо</div>
+                <div class="service-duration">1 ч 10 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж общий всего тела + лицо</div>
+                <div class="service-duration">1 ч 30 мин</div>
+                <div class="service-price">3 500 ₽</div>
+              </div>
             </div>
           </div>
         </div>
         
-        <div class="service-card">
-          <div class="service-image">
-            <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Лечение">
+        <!-- Аппаратная косметология -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Аппаратная косметология</div>
+            <div class="accordion-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
           </div>
-          <div class="service-content">
-            <h3 class="service-title">Лечение вросшего ногтя</h3>
-            <p class="service-description">Безоперационное лечение вросшего ногтя с установкой корректирующих систем</p>
-            <div class="service-price">
-              <span class="price">3500 ₽</span>
-              <span>120 мин</span>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item">
+                <div class="service-name">RF-лифтинг лица</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">RF-лифтинг лица + шеи + декольте</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Микротоки лица</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Вакуум живота</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Вакуум бёдер</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Прессотерапия всего тела</div>
+                <div class="service-duration">45 мин</div>
+                <div class="service-price">1 100 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Лазерный липолиз ягодиц</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">LED маска-фотомоложение</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">800 ₽</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Пилинги -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Дерматологические пилинги</div>
+            <div class="accordion-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item">
+                <div class="service-name">PRX-T33 (Италия)</div>
+                <div class="service-duration">Курс 4-10 процедур</div>
+                <div class="service-price">6 625 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">BioRePeelCl3 (Италия)</div>
+                <div class="service-duration">Курс 4-10 процедур</div>
+                <div class="service-price">8 750 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Пилинг лица Молочный | Тюріс | Миндаль</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">1 500 ₽</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Уходовые процедуры -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Уходовые процедуры</div>
+            <div class="accordion-icon">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item">
+                <div class="service-name">Альгинатная маска</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Маска по типу кожи</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Парафин для рук</div>
+                <div class="service-duration">25 мин</div>
+                <div class="service-price">200 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Парафин для ног</div>
+                <div class="service-duration">25 мин</div>
+                <div class="service-price">300 ₽</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1119,31 +1327,6 @@
     </div>
   </section>
 
-  <!-- Certificates Section -->
-  <section class="certificates">
-    <div class="container">
-      <h2 class="section-title">Сертификаты и образование</h2>
-      
-      <div class="certificates-grid">
-        <div class="certificate-item">
-          <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 1">
-        </div>
-        
-        <div class="certificate-item">
-          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 2">
-        </div>
-        
-        <div class="certificate-item">
-          <img src="https://images.unsplash.com/photo-1589330273594-fade1ee91647?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 3">
-        </div>
-        
-        <div class="certificate-item">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 4">
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Contacts Section -->
   <section class="contacts" id="contacts">
     <div class="container">
@@ -1266,6 +1449,28 @@
     
     mobileMenuBtn.addEventListener('click', () => {
       nav.classList.toggle('active');
+    });
+    
+    // Accordion functionality
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const isActive = header.classList.contains('active');
+        
+        // Close all accordion items
+        accordionHeaders.forEach(h => {
+          h.classList.remove('active');
+          h.nextElementSibling.classList.remove('active');
+        });
+        
+        // Open clicked item if it was closed
+        if (!isActive) {
+          header.classList.add('active');
+          content.classList.add('active');
+        }
+      });
     });
     
     // Time slot selection

@@ -5,11 +5,35 @@ const cron = require('node-cron');
 const TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
 const ADMIN_ID = 828439309;
 
-const bot = new TelegramBot(TOKEN, { polling: true });
+// Создаем бота с опциями для избежания конфликтов
+const bot = new TelegramBot(TOKEN, {
+  polling: {
+    interval: 300,
+    timeout: 10,
+    autoStart: true
+  }
+});
 
-// Хранилище записей (в реальном приложении используйте базу данных)
+// Хранилище записей
 let bookings = [];
-let clients = {}; // Для хранения chatId клиентов
+let clients = {};
+
+// Обработчик ошибок polling
+bot.on('polling_error', (error) => {
+  console.log('Polling error:', error.code, error.message);
+  
+  // Если конфликт - ждем и перезапускаем
+  if (error.code === 'ETELEGRAM' && error.message.includes('409')) {
+    console.log('Обнаружен конфликт. Перезапуск через 10 секунд...');
+    setTimeout(() => {
+      bot.stopPolling();
+      setTimeout(() => {
+        bot.startPolling();
+        console.log('🔄 Бот перезапущен после конфликта');
+      }, 2000);
+    }, 10000);
+  }
+});
 
 // Команда /start
 bot.onText(/\/start(?: (\d+))?/, (msg, match) => {
@@ -127,4 +151,4 @@ function addBooking(booking) {
 // Экспортируем для фронтенда
 module.exports = { addBooking, bookings };
 
-console.log('🤖 Бот запущен и работает!');
+console.log('🤖 Бот запущен и работает! Ожидаем сообщения...');

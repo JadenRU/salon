@@ -1,103 +1,88 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Гнатюк Надежда Георгиевна — косметолог</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fffafc;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: linear-gradient(135deg, #fdeef3, #fff1f8);
-      text-align: center;
-      padding: 50px 20px;
-    }
-    header h1 { color: #b77b94; font-size: 2.5em; margin-bottom: 10px; }
-    header p { color: #8e6a7b; font-size: 1.2em; }
-
-    section { padding: 50px 20px; max-width: 900px; margin: 0 auto; background-color: #fffdfd; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
-    h2 { color: #b77b94; text-align: center; margin-bottom: 25px; }
-    .gallery img { width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-
-    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; border-radius: 10px; overflow: hidden; }
-    th, td { border-bottom: 1px solid #e7d7df; padding: 14px; text-align: left; }
-    th { background-color: #fce8ef; color: #b77b94; }
-
-    button { background-color: #b77b94; color: #fff; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; transition: background 0.3s; font-size: 1em; }
-    button:hover { background-color: #a86f89; }
-
-    form { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-    input, select { padding: 12px; border: 1px solid #e7d7df; border-radius: 10px; font-size: 1em; }
-
-    footer { text-align: center; background-color: #fdeef3; padding: 25px; color: #8e6a7b; }
-
-    .confirm-telegram { display: none; text-align: center; margin-top: 20px; }
-    .confirm-telegram a { text-decoration: none; background-color: #b77b94; color: #fff; padding: 12px 25px; border-radius: 10px; display: inline-block; font-weight: 600; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гнатюк Надежда Георгиевна — косметолог</title>
+<style>
+body { font-family: 'Poppins', sans-serif; background-color: #fffafc; color: #333; margin:0; padding:0; }
+header { background: linear-gradient(135deg, #fdeef3, #fff1f8); text-align:center; padding:50px 20px; }
+header h1 { color:#b77b94; font-size:2.5em; margin-bottom:10px; }
+header p { color:#8e6a7b; font-size:1.2em; }
+section { padding:50px 20px; max-width:900px; margin:0 auto; background-color:#fffdfd; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,0.05); margin-bottom:30px; }
+h2 { color:#b77b94; text-align:center; margin-bottom:25px; }
+.gallery img { width:100%; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.1); margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin-bottom:20px; border-radius:10px; overflow:hidden; }
+th, td { border-bottom:1px solid #e7d7df; padding:14px; text-align:left; }
+th { background-color:#fce8ef; color:#b77b94; }
+button { background-color:#b77b94; color:#fff; border:none; padding:12px 25px; border-radius:10px; cursor:pointer; transition:0.3s; font-size:1em; }
+button:hover { background-color:#a86f89; }
+form { display:flex; flex-direction:column; gap:12px; margin-top:20px; }
+input, select { padding:12px; border:1px solid #e7d7df; border-radius:10px; font-size:1em; }
+footer { text-align:center; background-color:#fdeef3; padding:25px; color:#8e6a7b; }
+.confirm-telegram { display:none; text-align:center; margin-top:20px; }
+.confirm-telegram a { text-decoration:none; background-color:#b77b94; color:#fff; padding:12px 25px; border-radius:10px; display:inline-block; font-weight:600; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Гнатюк Надежда Георгиевна</h1>
-    <p>Профессиональный косметолог — забота о вашей коже с любовью 💖</p>
-  </header>
+<header>
+<h1>Гнатюк Надежда Георгиевна</h1>
+<p>Профессиональный косметолог — забота о вашей коже с любовью 💖</p>
+</header>
 
-  <section id="gallery">
-    <h2>Портфолио работ</h2>
-    <div class="gallery">
-      <img src="https://placehold.co/600x400/pink/white?text=Работа+1" alt="Работа 1">
-      <img src="https://placehold.co/600x400/pink/white?text=Работа+2" alt="Работа 2">
-    </div>
-  </section>
+<section id="gallery">
+<h2>Портфолио работ</h2>
+<div class="gallery">
+<img src="https://placehold.co/600x400/pink/white?text=Работа+1" alt="Работа 1">
+<img src="https://placehold.co/600x400/pink/white?text=Работа+2" alt="Работа 2">
+<img src="https://placehold.co/600x400/pink/white?text=Работа+3" alt="Работа 3">
+</div>
+</section>
 
-  <section id="services">
-    <h2>Услуги и цены</h2>
-    <table>
-      <tr><th>Услуга</th><th>Цена</th></tr>
-      <tr><td>Чистка лица</td><td>1800 ₽</td></tr>
-      <tr><td>Пилинг</td><td>1500 ₽</td></tr>
-      <tr><td>Массаж лица</td><td>1200 ₽</td></tr>
-    </table>
-  </section>
+<section id="services">
+<h2>Услуги и цены</h2>
+<table>
+<tr><th>Услуга</th><th>Цена</th></tr>
+<tr><td>Чистка лица</td><td>1800 ₽</td></tr>
+<tr><td>Пилинг</td><td>1500 ₽</td></tr>
+<tr><td>Массаж лица</td><td>1200 ₽</td></tr>
+</table>
+</section>
 
-  <section id="booking">
-    <h2>Онлайн-запись</h2>
-    <form id="bookingForm">
-      <input type="text" id="name" placeholder="Ваше имя" required>
-      <input type="tel" id="phone" placeholder="Телефон" required>
-      <select id="service" required>
-        <option value="">Выберите услугу</option>
-        <option value="Чистка лица">Чистка лица</option>
-        <option value="Пилинг">Пилинг</option>
-        <option value="Массаж лица">Массаж лица</option>
-      </select>
-      <input type="date" id="date" required>
-      <input type="time" id="time" required>
-      <button type="submit">Записаться</button>
-    </form>
-    <div class="confirm-telegram" id="confirmTelegram">
-      <p>Для подтверждения записи откройте Telegram и нажмите кнопку ниже 👇</p>
-      <a id="tgLink" target="_blank">Подтвердить запись через Telegram 💬</a>
-    </div>
-  </section>
+<section id="booking">
+<h2>Онлайн-запись</h2>
+<form id="bookingForm">
+<input type="text" id="name" placeholder="Ваше имя" required>
+<input type="tel" id="phone" placeholder="Телефон" required>
+<select id="service" required>
+<option value="">Выберите услугу</option>
+<option value="Чистка лица">Чистка лица</option>
+<option value="Пилинг">Пилинг</option>
+<option value="Массаж лица">Массаж лица</option>
+</select>
+<input type="date" id="date" required>
+<input type="time" id="time" required>
+<button type="submit">Записаться</button>
+</form>
+<div class="confirm-telegram" id="confirmTelegram">
+<p>Для подтверждения записи откройте Telegram и нажмите кнопку ниже 👇</p>
+<a id="tgLink" target="_blank">Подтвердить запись через Telegram 💬</a>
+</div>
+</section>
 
-  <footer>
-    <p>© 2025 Гнатюк Надежда Георгиевна — косметолог</p>
-  </footer>
+<footer>
+<p>© 2025 Гнатюк Надежда Георгиевна — косметолог</p>
+</footer>
 
-  <script>
-    const form = document.getElementById('bookingForm');
-    const confirmBox = document.getElementById('confirmTelegram');
-    const tgLink = document.getElementById('tgLink');
+<script>
+const form = document.getElementById('bookingForm');
+const confirmBox = document.getElementById('confirmTelegram');
+const tgLink = document.getElementById('tgLink');
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+form.addEventListener('submit', function(e){
+    e.preventDefault();
 
-      const booking = {
+    const booking = {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
         serviceName: document.getElementById('service').value,
@@ -105,34 +90,29 @@
         time: document.getElementById('time').value,
         price: document.querySelector(`#service option:checked`).textContent.includes('Чистка') ? 1800 :
                document.querySelector(`#service option:checked`).textContent.includes('Пилинг') ? 1500 : 1200
-      };
+    };
 
-      alert(`Спасибо, ${booking.name}! Ваша запись принята.`);
-
-      sendToTelegram(booking);
-      showConfirmButton(booking);
-    });
-
-    function sendToTelegram(booking) {
-      const token = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
-      const chatId = '828439309';
-      const text = `🧴 Новая запись!\n\nИмя: ${booking.name}\nТелефон: ${booking.phone}\nУслуга: ${booking.serviceName}\nДата: ${booking.date} ${booking.time}\nЦена: ${booking.price} ₽`;
-
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    // Отправка на Render
+    fetch('https://salon-qkri.onrender.com/new-booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text })
-      })
-      .then(res => res.json())
-      .then(data => console.log('Уведомление отправлено в Telegram:', data))
-      .catch(err => console.error('Ошибка Telegram:', err));
-    }
+        body: JSON.stringify(booking)
+    })
+    .then(res => res.text())
+    .then(() => {
+        // Уведомление клиенту
+        alert(`Спасибо, ${booking.name}! Ваша запись принята.`);
 
-    function showConfirmButton(booking) {
-      confirmBox.style.display = 'block';
-      const botUsername = 'NadezhdaBeauty_Bot';
-      tgLink.href = `https://t.me/${botUsername}?start=confirm_${encodeURIComponent(booking.name)}_${encodeURIComponent(booking.serviceName)}_${booking.date}_${booking.time}`;
-    }
-  </script>
+        // Показываем кнопку подтверждения Telegram
+        confirmBox.style.display = 'block';
+        const botUsername = 'NadezhdaBeauty_Bot';
+        tgLink.href = `https://t.me/${botUsername}?start=confirm_${encodeURIComponent(booking.name)}_${encodeURIComponent(booking.serviceName)}_${booking.date}_${booking.time}`;
+    })
+    .catch(err => {
+        alert('Ошибка записи, попробуйте позже.');
+        console.error(err);
+    });
+});
+</script>
 </body>
 </html>

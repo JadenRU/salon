@@ -1,38 +1,29 @@
 // === bot.js ===
-// Telegram Bot + PostgreSQL хранение броней (Render-ready)
+// Telegram Bot + PostgreSQL + уведомление мастеру
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const { Pool } = require('pg');
 
-// ======================
-// 🔧 Конфигурация
-// ======================
-const TOKEN = process.env.BOT_TOKEN;
-const DATABASE_URL = process.env.DATABASE_URL;
+const TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
+const DATABASE_URL = 'postgresql://salon_bookings_user:lyJtYwUBxNBScuNTQvJDjRiNb9O7AhQz@dpg-d3qhsd63jp1c738krfd0-a/salon_bookings';
+const MASTER_CHAT_ID = '828439309';
 const WEB_APP_URL = 'https://salon-8lor.onrender.com';
 const PORT = process.env.PORT || 10000;
 
-// ======================
-// 🚀 Инициализация
-// ======================
 const app = express();
 app.use(bodyParser.json());
 
-// Telegram Bot (через Webhook)
 const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${WEB_APP_URL}/bot${TOKEN}`);
 
-// PostgreSQL подключение
 const pool = new Pool({
   connectionString: DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
-// ======================
-// 🗄️ Создание таблицы при старте
-// ======================
+// Создание таблицы при старте
 (async () => {
   const client = await pool.connect();
   await client.query(`
@@ -52,88 +43,63 @@ const pool = new Pool({
   console.log('📦 Таблица bookings готова');
 })();
 
-// ======================
-// 📩 API: создать бронь
-// ======================
+// POST /api/book
 app.post('/api/book', async (req, res) => {
+  const b = req.body;
+  if (!b.id || !b.name || !b.phone || !b.date || !b.time) {
+    return res.status(400).json({ success: false, error: 'Неверные данные' });
+  }
+
+  const client = await pool.connect();
   try {
-    const b = req.body;
-
-    if (!b.id || !b.name || !b.phone || !b.date || !b.time) {
-      return res.status(400).json({ success: false, error: 'Неверные данные' });
-    }
-
-    const client = await pool.connect();
-
-    // Проверяем занятость времени
+    // Проверка занятости времени
     const check = await client.query(
-      'SELECT id FROM bookings WHERE date = $1 AND time = $2 LIMIT 1',
+      'SELECT id FROM bookings WHERE date=$1 AND time=$2 LIMIT 1',
       [b.date, b.time]
     );
     if (check.rows.length > 0) {
-      client.release();
       return res.json({ success: false, error: 'Это время уже занято' });
     }
 
-    // Добавляем бронь
     await client.query(
-      `INSERT INTO bookings (id, name, phone, date, time, service_name, service_price, service_duration)
+      `INSERT INTO bookings (id,name,phone,date,time,service_name,service_price,service_duration)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-      [
-        b.id,
-        b.name,
-        b.phone,
-        b.date,
-        b.time,
-        b.serviceName,
-        b.servicePrice,
-        b.serviceDuration || '60'
-      ]
+      [b.id, b.name, b.phone, b.date, b.time, b.serviceName, b.servicePrice, b.serviceDuration || '60']
     );
 
-    client.release();
-    console.log('✅ Сохранена новая бронь:', b);
+    // Уведомление мастеру
+    const msg = `💌 Новая запись!\nИмя: ${b.name}\nТелефон: ${b.phone}\nДата: ${b.date}\nВремя: ${b.time}\nУслуга: ${b.serviceName}\nЦена: ${b.servicePrice} ₽`;
+    bot.sendMessage(MASTER_CHAT_ID, msg);
 
     res.json({ success: true, bookingId: b.id });
+    console.log('✅ Новая бронь сохранена:', b);
   } catch (err) {
     console.error('❌ Ошибка при бронировании:', err);
     res.status(500).json({ success: false, error: 'Ошибка сервера' });
+  } finally {
+    client.release();
   }
 });
 
-// ======================
-// 🤖 Webhook для Telegram
-// ======================
+// Webhook Telegram
 app.post(`/bot${TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
-// ======================
-// 💬 /start <bookingId>
-// ======================
+// /start <id>
 bot.onText(/\/start(?:\s+(.+))?/, async (msg, match) => {
   const chatId = msg.chat.id;
   const bookingId = match[1];
+  if (!bookingId) return bot.sendMessage(chatId, '👋 Привет! Сделайте запись на сайте.');
 
-  if (!bookingId) {
-    return bot.sendMessage(
-      chatId,
-      '👋 Привет! Это бот косметолога Надежды.\nОформите запись на сайте, чтобы получить подтверждение здесь.'
-    );
-  }
-
+  const client = await pool.connect();
   try {
-    const client = await pool.connect();
-    const { rows } = await client.query('SELECT * FROM bookings WHERE id = $1', [bookingId]);
-    client.release();
-
-    if (rows.length === 0) {
-      return bot.sendMessage(chatId, '❌ Запись не найдена.');
-    }
+    const { rows } = await client.query('SELECT * FROM bookings WHERE id=$1', [bookingId]);
+    if (rows.length === 0) return bot.sendMessage(chatId, '❌ Запись не найдена.');
 
     const b = rows[0];
-    const msgText =
+    const text =
       `✅ *Ваша запись подтверждена!*\n\n` +
       `👩‍💼 *Имя:* ${b.name}\n` +
       `📞 *Телефон:* ${b.phone}\n` +
@@ -142,22 +108,18 @@ bot.onText(/\/start(?:\s+(.+))?/, async (msg, match) => {
       `💆‍♀️ *Услуга:* ${b.service_name}\n` +
       `💰 *Цена:* ${b.service_price} ₽`;
 
-    bot.sendMessage(chatId, msgText, { parse_mode: 'Markdown' });
+    bot.sendMessage(chatId, text, { parse_mode: 'Markdown' });
   } catch (err) {
-    console.error('Ошибка при загрузке брони:', err);
-    bot.sendMessage(chatId, '⚠️ Ошибка при получении данных. Попробуйте позже.');
+    console.error('Ошибка при получении брони:', err);
+    bot.sendMessage(chatId, '⚠️ Ошибка сервера, попробуйте позже.');
+  } finally {
+    client.release();
   }
 });
 
-// ======================
-// 🧠 Тестовый маршрут
-// ======================
-app.get('/', (_, res) => res.send('✅ Telegram Bot с PostgreSQL работает'));
+app.get('/', (_, res) => res.send('✅ Telegram Bot с PostgreSQL и уведомлениями работает'));
 
-// ======================
-// 🚀 Запуск сервера
-// ======================
 app.listen(PORT, () => {
-  console.log(`🚀 Сервер запущен на порту ${PORT}`);
+  console.log(`🚀 Сервер запущен на ${PORT}`);
   console.log(`🌐 Webhook: ${WEB_APP_URL}/bot${TOKEN}`);
 });

@@ -1,95 +1,1342 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ногтевой мастер — Надежда Гнатюк</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nail-мастер Надежда Гнатюк | Эстетичный уход и здоровье ногтей</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #f8e8e8;
+      --secondary: #e6d2d2;
+      --accent: #d4b483;
+      --accent-dark: #b8945f;
+      --text: #2b2b2b;
+      --text-light: #6c6c6c;
+      --white: #ffffff;
+      --shadow: 0 6px 20px rgba(24,20,18,0.08);
+      --radius: 16px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    header {
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--white));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--accent);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    
+    .logo-subtitle {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    nav a:hover {
+      color: var(--accent);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text);
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    
+    .hero-content p {
+      font-size: 18px;
+      color: var(--text-light);
+      margin-bottom: 30px;
+    }
+    
+    .hero-badges {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .badge {
+      background-color: rgba(212, 180, 131, 0.15);
+      color: var(--accent-dark);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-size: 16px;
+    }
+    
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(212, 180, 131, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid rgba(43, 43, 43, 0.1);
+      color: var(--text);
+    }
+    
+    .btn-secondary:hover {
+      background-color: rgba(43, 43, 43, 0.05);
+    }
+    
+    .hero-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(248,232,232,0.2));
+    }
+    
+    /* Section Titles */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent);
+    }
+    
+    /* Services Section */
+    .services {
+      padding: 80px 0;
+      background-color: var(--white);
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .service-card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    }
+    
+    .service-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+    
+    .service-content {
+      padding: 25px;
+    }
+    
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    
+    .service-description {
+      color: var(--text-light);
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+    
+    .service-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .price {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    
+    /* Gallery Section */
+    .gallery-section {
+      padding: 80px 0;
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      height: 250px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: var(--white);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    
+    /* Reviews Section */
+    .reviews {
+      padding: 80px 0;
+      background-color: var(--white);
+    }
+    
+    .reviews-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 30px;
+      padding: 20px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--primary);
+    }
+    
+    .reviews-slider::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .reviews-slider::-webkit-scrollbar-track {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+    
+    .reviews-slider::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 10px;
+    }
+    
+    .review-card {
+      min-width: 350px;
+      background-color: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .review-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .review-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+    
+    .review-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .review-name {
+      font-weight: 600;
+    }
+    
+    .review-date {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+    
+    .review-stars {
+      color: var(--accent);
+      margin: 10px 0;
+    }
+    
+    .review-text {
+      color: var(--text-light);
+      font-style: italic;
+    }
+    
+    /* Booking Section */
+    .booking {
+      padding: 80px 0;
+    }
+    
+    .booking-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      background-color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .booking-form {
+      padding: 40px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.1);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(212, 180, 131, 0.2);
+    }
+    
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .time-slot {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .time-slot:hover {
+      border-color: var(--accent);
+    }
+    
+    .time-slot.selected {
+      background-color: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+    
+    .booking-image {
+      background: linear-gradient(45deg, var(--accent), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    
+    .booking-image-content {
+      text-align: center;
+      color: var(--white);
+    }
+    
+    .booking-image-content i {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .booking-image-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    
+    /* Certificates Section */
+    .certificates {
+      padding: 80px 0;
+      background-color: var(--white);
+    }
+    
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .certificate-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 200px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .certificate-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .certificate-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Contacts Section */
+    .contacts {
+      padding: 80px 0;
+    }
+    
+    .contacts-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(212, 180, 131, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 20px;
+    }
+    
+    .contact-details h4 {
+      margin-bottom: 5px;
+    }
+    
+    .contact-details p {
+      color: var(--text-light);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(212, 180, 131, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .social-link:hover {
+      background-color: var(--accent);
+      color: var(--white);
+    }
+    
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--text);
+      color: var(--white);
+      padding: 50px 0 20px;
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    
+    .footer-col ul {
+      list-style: none;
+    }
+    
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-col a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-col a:hover {
+      color: var(--accent);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      max-width: 800px;
+      width: 90%;
+      background-color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--white);
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    .modal-body {
+      padding: 0;
+    }
+    
+    .modal-image {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .hero-badges, .hero-buttons {
+        justify-content: center;
+      }
+      
+      .booking-container, .contacts-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      nav ul {
+        gap: 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 28px;
+      }
+      
+      .hero-content h1 {
+        font-size: 36px;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .time-slots {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: var(--transition);
+        z-index: 999;
+      }
+      
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero-badges {
+        flex-wrap: wrap;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+      
+      .time-slots {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-card">
-      <div class="brand">
-        <div class="logo">N</div>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <div class="logo-icon">N</div>
         <div>
-          <div class="tiny muted">Косметолог & nail-мастер</div>
-          <div style="font-weight:700">Надежда Гнатюк</div>
+          <div class="logo-text">Надежда Гнатюк</div>
+          <div class="logo-subtitle">Ногтевой мастер & косметолог</div>
         </div>
       </div>
-
-      <h1>Эстетичный уход & здоровье ногтей — аккуратно, красиво, надолго</h1>
-      <p class="lead">Специалист по лечебной и эстетической работе с ногтями. Комфортная процедура, современная стерилизация, индивидуальный подход.</p>
-
-      <div class="quick">
-        <div class="pill">Опыт 8 лет</div>
-        <div class="pill">Сертифицировано</div>
-        <div class="pill">Гарантия результата</div>
-      </div>
-
-      <div style="margin-top:18px" class="cta-row">
-        <button class="btn" id="book-now">Записаться</button>
-        <button class="btn-outline" id="view-works">Портфолио</button>
-        <a class="btn-outline" href="#contacts">Контакты</a>
-      </div>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav>
+        <ul>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#gallery">Портфолио</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#booking">Запись</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <div class="hero-photo">
-      <img src="images/nadezhda.jpg" alt="Надежда Гнатюк">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Эстетичный уход & здоровье ногтей</h1>
+        <p>Специалист по лечебной и эстетической работе с ногтями. Комфортная процедура, современная стерилизация, индивидуальный подход.</p>
+        
+        <div class="hero-badges">
+          <div class="badge">Опыт 8 лет</div>
+          <div class="badge">Сертифицировано</div>
+          <div class="badge">Гарантия результата</div>
+        </div>
+        
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="book-now">Записаться онлайн</button>
+          <button class="btn btn-secondary" id="view-works">Портфолио</button>
+        </div>
+      </div>
+      
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1621605815976-ef2a4608c8b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Надежда Гнатюк">
+      </div>
     </div>
   </section>
 
-  <!-- GRID: gallery + booking -->
-  <div class="grid-2">
-    <div>
-      <div class="card">
-        <h3 style="margin-top:0">Галерея работ</h3>
-        <div class="gallery" id="gallery">
-          <figure><img src="images/work1.jpg" alt="work1"></figure>
-          <figure class="before-after"><img src="images/work2_before.jpg" alt="before"><div class="ba-handle"></div></figure>
-          <figure class="before-after"><img src="images/work2_after.jpg" alt="after"><div class="ba-handle"></div></figure>
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title">Мои услуги</h2>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Маникюр">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Комплексный маникюр</h3>
+            <p class="service-description">Аппаратный, обрезной, комбинированный маникюр с покрытием гель-лаком</p>
+            <div class="service-price">
+              <span class="price">1200 ₽</span>
+              <span>60 мин</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <aside>
-      <div class="card">
-        <h3 style="margin-top:0">Услуги и цены</h3>
-        <table>
-          <thead><tr><th>Услуга</th><th class="muted">Время</th><th class="muted">Цена</th></tr></thead>
-          <tbody id="services-table">
-            <tr data-duration="60"><td>Маникюр</td><td>60 мин</td><td class="price">1200 ₽</td></tr>
-            <tr data-duration="90"><td>Педикюр + стопы</td><td>90 мин</td><td class="price">2200 ₽</td></tr>
-            <tr data-duration="120"><td>Лечение вросшего ногтя</td><td>120 мин</td><td class="price">3500 ₽</td></tr>
-          </tbody>
-        </table>
-
-        <hr style="margin:12px 0">
-        <div style="font-weight:600; margin-bottom:6px">Онлайн-запись</div>
-        <div class="booking">
-          <input id="client-name" class="input" placeholder="Ваше имя">
-          <input id="client-phone" class="input" placeholder="Телефон (+7...)">
-          <input id="date" type="date" class="input">
-          <div id="times" class="slots"></div>
-          <div style="display:flex; gap:8px; margin-top:6px">
-            <button class="btn" id="confirm-book">Подтвердить</button>
+        
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://images.unsplash.com/photo-1607778833979-4f617513f36c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Педикюр">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Педикюр + уход за стопами</h3>
+            <p class="service-description">Аппаратная обработка стоп, удаление омозолелостей, покрытие гель-лаком</p>
+            <div class="service-price">
+              <span class="price">2200 ₽</span>
+              <span>90 мин</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Лечение">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Лечение вросшего ногтя</h3>
+            <p class="service-description">Безоперационное лечение вросшего ногтя с установкой корректирующих систем</p>
+            <div class="service-price">
+              <span class="price">3500 ₽</span>
+              <span>120 мин</span>
+            </div>
           </div>
         </div>
       </div>
-    </aside>
-  </div>
+    </div>
+  </section>
 
-  <footer id="contacts"> 
-    <div class="tiny muted">© 2025 Надежда Гнатюк • Все права защищены</div>
-    <div style="margin-top:6px">
-      <a href="https://vk.com/club233204062" target="_blank">VK</a> | 
-      <a href="https://t.me/kosmetolognada" target="_blank">Telegram</a>
+  <!-- Gallery Section -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Мои работы</h2>
+      
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 1">
+          <div class="gallery-overlay">
+            <p>Французский маникюр</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 2">
+          <div class="gallery-overlay">
+            <p>Геометрический дизайн</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1598706443097-47d82626f7c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 3">
+          <div class="gallery-overlay">
+            <p>Фольгированный дизайн</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 4">
+          <div class="gallery-overlay">
+            <p>Нюдовый маникюр</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 5">
+          <div class="gallery-overlay">
+            <p>Цветочный дизайн</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1607778833979-4f617513f36c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 6">
+          <div class="gallery-overlay">
+            <p>Педикюр с дизайном</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <h2 class="section-title">Отзывы клиентов</h2>
+      
+      <div class="reviews-slider">
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Анна">
+            </div>
+            <div>
+              <div class="review-name">Анна</div>
+              <div class="review-date">2 недели назад</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">Надежда - настоящий профессионал! Делает все очень аккуратно и качественно. Маникюр держится больше трех недель. Обязательно буду возвращаться!</p>
+        </div>
+        
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Мария">
+            </div>
+            <div>
+              <div class="review-name">Мария</div>
+              <div class="review-date">3 недели назад</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">Обратилась с проблемой вросшего ногтя. Надежда помогла решить проблему без операции. Очень деликатная работа, никакой боли. Спасибо огромное!</p>
+        </div>
+        
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Елена">
+            </div>
+            <div>
+              <div class="review-name">Елена</div>
+              <div class="review-date">месяц назад</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">Хожу к Надежде уже больше года. Всегда делает идеальный маникюр, подбирает интересные дизайны. Кабинет очень чистый, все инструменты стерильные. Рекомендую!</p>
+        </div>
+        
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">
+              <img src="https://randomuser.me/api/portraits/women/76.jpg" alt="Ольга">
+            </div>
+            <div>
+              <div class="review-name">Ольга</div>
+              <div class="review-date">2 месяца назад</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">Делала педикюр, очень довольна результатом! Кожа стоп стала как у младенца. Надежда очень внимательная и аккуратная. Теперь только к ней!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <h2 class="section-title">Онлайн-запись</h2>
+      
+      <div class="booking-container">
+        <div class="booking-form">
+          <form id="booking-form">
+            <div class="form-group">
+              <label for="service">Выберите услугу</label>
+              <select id="service" class="form-control">
+                <option value="1200">Маникюр - 1200 ₽</option>
+                <option value="2200">Педикюр - 2200 ₽</option>
+                <option value="3500">Лечение вросшего ногтя - 3500 ₽</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" class="form-control" placeholder="Введите ваше имя">
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" class="form-control" placeholder="+7 (XXX) XXX-XX-XX">
+            </div>
+            
+            <div class="form-group">
+              <label for="date">Дата визита</label>
+              <input type="date" id="date" class="form-control">
+            </div>
+            
+            <div class="form-group">
+              <label>Время визита</label>
+              <div class="time-slots">
+                <div class="time-slot">10:00</div>
+                <div class="time-slot">11:00</div>
+                <div class="time-slot">12:00</div>
+                <div class="time-slot">13:00</div>
+                <div class="time-slot">14:00</div>
+                <div class="time-slot">15:00</div>
+                <div class="time-slot">16:00</div>
+                <div class="time-slot">17:00</div>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Записаться</button>
+          </form>
+        </div>
+        
+        <div class="booking-image">
+          <div class="booking-image-content">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Запишитесь онлайн</h3>
+            <p>Выберите удобное время и дату для визита</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Section -->
+  <section class="certificates">
+    <div class="container">
+      <h2 class="section-title">Сертификаты и образование</h2>
+      
+      <div class="certificates-grid">
+        <div class="certificate-item">
+          <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 1">
+        </div>
+        
+        <div class="certificate-item">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 2">
+        </div>
+        
+        <div class="certificate-item">
+          <img src="https://images.unsplash.com/photo-1589330273594-fade1ee91647?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 3">
+        </div>
+        
+        <div class="certificate-item">
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Сертификат 4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts Section -->
+  <section class="contacts" id="contacts">
+    <div class="container">
+      <h2 class="section-title">Контакты</h2>
+      
+      <div class="contacts-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Адрес</h4>
+              <p>г. Москва, ул. Примерная, д. 123</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Телефон</h4>
+              <p>+7 (999) 123-45-67</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Часы работы</h4>
+              <p>Пн-Пт: 10:00-19:00<br>Сб: 10:00-16:00<br>Вс: выходной</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Социальные сети</h4>
+              <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.372951239977!2d37.617299315930664!3d55.75582668055313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1623755117893!5m2!1sru!2sru" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h4>Надежда Гнатюк</h4>
+          <p>Сертифицированный ногтевой мастер и косметолог с 8-летним опытом работы.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Услуги</h4>
+          <ul>
+            <li><a href="#">Маникюр</a></li>
+            <li><a href="#">Педикюр</a></li>
+            <li><a href="#">Лечение ногтей</a></li>
+            <li><a href="#">Наращивание</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="tel:+79991234567">+7 (999) 123-45-67</a></li>
+            <li><a href="mailto:info@example.com">info@example.com</a></li>
+            <li>г. Москва, ул. Примерная, д. 123</li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Соцсети</h4>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        © 2023 Надежда Гнатюк. Все права защищены.
+      </div>
     </div>
   </footer>
-</div>
 
-<script src="js/main.js"></script>
+  <!-- Modal for Gallery -->
+  <div class="modal" id="gallery-modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-body">
+        <img src="" alt="" class="modal-image" id="modal-image">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+    
+    // Time slot selection
+    const timeSlots = document.querySelectorAll('.time-slot');
+    
+    timeSlots.forEach(slot => {
+      slot.addEventListener('click', () => {
+        timeSlots.forEach(s => s.classList.remove('selected'));
+        slot.classList.add('selected');
+      });
+    });
+    
+    // Gallery modal
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modal = document.getElementById('gallery-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalClose = document.querySelector('.modal-close');
+    
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const imgSrc = item.querySelector('img').src;
+        modalImage.src = imgSrc;
+        modal.style.display = 'flex';
+      });
+    });
+    
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    // Booking form
+    const bookingForm = document.getElementById('booking-form');
+    const bookNowBtn = document.getElementById('book-now');
+    
+    bookNowBtn.addEventListener('click', () => {
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Set minimum date for booking
+    const dateInput = document.getElementById('date');
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const minDate = tomorrow.toISOString().split('T')[0];
+    dateInput.min = minDate;
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu after click
+          nav.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

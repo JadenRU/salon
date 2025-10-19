@@ -1,41 +1,29 @@
+const express = require('express');
+const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
+const path = require('path');
+const cors = require('cors');
 
-// Твой бот
-const TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
-const ADMIN_ID = 828439309;
+const app = express();
+const PORT = process.env.PORT || 3000;
+const BOT_TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
+const ADMIN_CHAT_ID = '828439309';
+const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
-const bot = new TelegramBot(TOKEN, { polling: true });
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../public')));
 
-// Слоты и записи в памяти (можно подключить DB)
-let bookings = [];
+app.post('/api/book', (req, res) => {
+    const { name, phone, date, time, service } = req.body;
+    if(!name || !phone || !date || !time || !service) return res.status(400).json({ message:'Неверные данные' });
 
-bot.onText(/\/start (\d+)/, (msg, match) => {
-  const chatId = msg.chat.id;
-  const bookingId = Number(match[1]);
-  const booking = bookings.find(b => b.id === bookingId);
-  if(booking){
-    bot.sendMessage(chatId, `Привет, ${booking.name}! Ваша запись подтверждена:\n`+
-      `${booking.serviceName}\nДата: ${booking.date} ${booking.time}\nСтоимость: ${booking.price} ₽`);
-  } else {
-    bot.sendMessage(chatId, 'Привет! У нас нет такой записи.');
-  }
+    const message = `Новая запись:\nИмя: ${name}\nТелефон: ${phone}\nДата: ${date}\nВремя: ${time}\nУслуга: ${service}`;
+    bot.sendMessage(ADMIN_CHAT_ID, message).catch(console.error);
+    res.json({ message: 'Запись успешно отправлена' });
 });
 
-bot.on('message', msg => {
-  // можно добавить обработку сообщений от клиентов
-});
+app.get('*', (req,res)=>{ res.sendFile(path.join(__dirname,'../public/index.html')) });
+app.listen(PORT, ()=>console.log(`Server running on port ${PORT}`));
 
-// Функция добавления записи
-function addBooking(booking){
-  bookings.push(booking);
-
-  // Уведомление администратору
-  bot.sendMessage(ADMIN_ID, `Новая запись!\n${booking.name}\n${booking.phone}\n${booking.serviceName}\n${booking.date} ${booking.time}`);
-
-  // Уведомление клиенту через бот (если у него уже есть chatId)
-  // в реальном кейсе нужно хранить chatId после первого запуска бота
-  // demo: отправляем ссылку на /start
-}
-
-// Экспортируем для фронтенда через fetch
-module.exports = { addBooking };
+bot.on('message', (msg)=>{ bot.sendMessage(msg.chat.id, "Привет! Бот готов принимать ваши записи."); });

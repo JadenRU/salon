@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nail-мастер Надежда Гнатюк | Эстетичный уход и здоровье ногтей</title>
+  <title>Косметолог Надежда Гнатюк | Эстетичный уход и здоровье кожи</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -519,6 +519,13 @@
       border-color: var(--accent);
     }
     
+    .time-slot.occupied {
+      background-color: rgba(0,0,0,0.05);
+      color: var(--text-light);
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+    
     .booking-image {
       background: linear-gradient(45deg, var(--accent), var(--secondary));
       display: flex;
@@ -541,37 +548,6 @@
       font-family: 'Playfair Display', serif;
       font-size: 28px;
       margin-bottom: 15px;
-    }
-    
-    /* Certificates Section */
-    .certificates {
-      padding: 80px 0;
-      background-color: var(--white);
-    }
-    
-    .certificates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    
-    .certificate-item {
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      height: 200px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    
-    .certificate-item:hover {
-      transform: translateY(-5px);
-    }
-    
-    .certificate-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
     
     /* Contacts Section */
@@ -745,6 +721,34 @@
       object-fit: contain;
     }
     
+    /* Success Message */
+    .success-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--white);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      z-index: 3000;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    
+    .success-message i {
+      font-size: 50px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    
+    .success-message h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+    }
+    
     /* Responsive */
     @media (max-width: 992px) {
       .hero {
@@ -852,7 +856,7 @@
         <div class="logo-icon">N</div>
         <div>
           <div class="logo-text">Надежда Гнатюк</div>
-          <div class="logo-subtitle">Ногтевой мастер & косметолог</div>
+          <div class="logo-subtitle">Косметолог & массажист</div>
         </div>
       </div>
       
@@ -876,8 +880,8 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Эстетичный уход & здоровье ногтей</h1>
-        <p>Специалист по лечебной и эстетической работе с ногтями. Комфортная процедура, современная стерилизация, индивидуальный подход.</p>
+        <h1>Эстетичный уход & здоровье кожи</h1>
+        <p>Сертифицированный косметолог с 8-летним опытом работы. Комфортная процедура, современные методики, индивидуальный подход.</p>
         
         <div class="hero-badges">
           <div class="badge">Опыт 8 лет</div>
@@ -953,6 +957,36 @@
                 <div class="service-duration">30 мин</div>
                 <div class="service-price">1 200 ₽</div>
               </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица Релакс | Классика</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица Классический</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица Скульптурный (Испанский)</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж лица, шеи, декольте по Жаке + Гуаша</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж Буккальный</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж ШВЗ</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">800 ₽</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1001,6 +1035,61 @@
                 <div class="service-name">Массаж общий всего тела + лицо</div>
                 <div class="service-duration">1 ч 30 мин</div>
                 <div class="service-price">3 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж рук + кисти</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж ног до колена + стопы</div>
+                <div class="service-duration">35 мин</div>
+                <div class="service-price">1 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">ШВЗ + спина</div>
+                <div class="service-duration">50 мин</div>
+                <div class="service-price">1 800 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж классический всего тела + банки</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 600 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж спины + фотостимулятор мышц</div>
+                <div class="service-duration">1 ч</div>
+                <div class="service-price">2 100 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Стоунтерапия + ручной массаж всего тела</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Стоунтерапия + массаж спины</div>
+                <div class="service-duration">45 мин</div>
+                <div class="service-price">1 800 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж спины ручной + вакуум аппаратный</div>
+                <div class="service-duration">45 мин</div>
+                <div class="service-price">1 900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж живота ручной + вакуум аппаратный</div>
+                <div class="service-duration">40 мин</div>
+                <div class="service-price">1 900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж ягодиц + вакуум аппаратный</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">1 900 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Массаж ягодиц + лазерный липолиз</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">1 900 ₽</div>
               </div>
             </div>
           </div>
@@ -1055,6 +1144,86 @@
                 <div class="service-name">LED маска-фотомоложение</div>
                 <div class="service-duration">30 мин</div>
                 <div class="service-price">800 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Ударно-волновая терапия бёдер</div>
+                <div class="service-duration">20 мин</div>
+                <div class="service-price">500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Фотостимулятор мышц спины</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">600 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Роликовый массаж спины</div>
+                <div class="service-duration">20 мин</div>
+                <div class="service-price">500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Роликовый массаж бёдер</div>
+                <div class="service-duration">20 мин</div>
+                <div class="service-price">500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Прессотерапия живота</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Прессотерапия ног</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">RF-лифтинг шеи</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">RF-лифтинг декольте</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">RF-лифтинг тела (одна зона)</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Микротоки шеи</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Микротоки декольте</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Криотерапия (манипула) лица</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Криотерапия (манипула) шеи</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Криотерапия (манипула) декольте</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">1 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Криотерапия (манипула) лица + шеи + декольте</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Дарсонвализация по лицу по пудре</div>
+                <div class="service-duration">30 мин</div>
+                <div class="service-price">500 ₽</div>
               </div>
             </div>
           </div>
@@ -1119,6 +1288,26 @@
                 <div class="service-duration">25 мин</div>
                 <div class="service-price">300 ₽</div>
               </div>
+              <div class="service-item">
+                <div class="service-name">Чистка лица комбинированная</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 000 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Чистка лица механическая</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">1 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Чистка лица Узи-лопатка (ультрозвуковая)</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">1 500 ₽</div>
+              </div>
+              <div class="service-item">
+                <div class="service-name">Чистка вакуумная</div>
+                <div class="service-duration">60 мин</div>
+                <div class="service-price">2 300 ₽</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1133,44 +1322,44 @@
       
       <div class="gallery">
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 1">
+          <img src="https://images.unsplash.com/photo-1556228578-8cB8e2e466ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Результат массажа лица">
           <div class="gallery-overlay">
-            <p>Французский маникюр</p>
+            <p>Результат массажа лица</p>
           </div>
         </div>
         
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01988a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 2">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Результат пилинга">
           <div class="gallery-overlay">
-            <p>Геометрический дизайн</p>
+            <p>Результат пилинга</p>
           </div>
         </div>
         
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1598706443097-47d82626f7c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 3">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Результат RF-лифтинга">
           <div class="gallery-overlay">
-            <p>Фольгированный дизайн</p>
+            <p>Результат RF-лифтинга</p>
           </div>
         </div>
         
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 4">
+          <img src="https://images.unsplash.com/photo-1556228577-4fd352bde4fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Результат микротоков">
           <div class="gallery-overlay">
-            <p>Нюдовый маникюр</p>
+            <p>Результат микротоков</p>
           </div>
         </div>
         
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 5">
+          <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Результат прессотерапии">
           <div class="gallery-overlay">
-            <p>Цветочный дизайн</p>
+            <p>Результат прессотерапии</p>
           </div>
         </div>
         
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1607778833979-4f617513f36c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Работа 6">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Результат чистки лица">
           <div class="gallery-overlay">
-            <p>Педикюр с дизайном</p>
+            <p>Результат чистки лица</p>
           </div>
         </div>
       </div>
@@ -1200,7 +1389,7 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
           </div>
-          <p class="review-text">Надежда - настоящий профессионал! Делает все очень аккуратно и качественно. Маникюр держится больше трех недель. Обязательно буду возвращаться!</p>
+          <p class="review-text">Надежда - настоящий профессионал! Делает все очень аккуратно и качественно. После курса массажа лица кожа стала более подтянутой и свежей. Обязательно буду возвращаться!</p>
         </div>
         
         <div class="review-card">
@@ -1220,7 +1409,7 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
           </div>
-          <p class="review-text">Обратилась с проблемой вросшего ногтя. Надежда помогла решить проблему без операции. Очень деликатная работа, никакой боли. Спасибо огромное!</p>
+          <p class="review-text">Обратилась с проблемой пигментации. Надежда подобрала курс пилингов, которые помогли решить проблему. Очень деликатная работа, никакого дискомфорта. Спасибо огромное!</p>
         </div>
         
         <div class="review-card">
@@ -1240,7 +1429,7 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
           </div>
-          <p class="review-text">Хожу к Надежде уже больше года. Всегда делает идеальный маникюр, подбирает интересные дизайны. Кабинет очень чистый, все инструменты стерильные. Рекомендую!</p>
+          <p class="review-text">Хожу к Надежде уже больше года. Всегда делает идеальный массаж, подбирает эффективные процедуры. Кабинет очень чистый, все инструменты стерильные. Рекомендую!</p>
         </div>
         
         <div class="review-card">
@@ -1260,7 +1449,7 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
           </div>
-          <p class="review-text">Делала педикюр, очень довольна результатом! Кожа стоп стала как у младенца. Надежда очень внимательная и аккуратная. Теперь только к ней!</p>
+          <p class="review-text">Делала прессотерапию, очень довольна результатом! Отеки ушли, ноги стали легче. Надежда очень внимательная и аккуратная. Теперь только к ней!</p>
         </div>
       </div>
     </div>
@@ -1277,9 +1466,30 @@
             <div class="form-group">
               <label for="service">Выберите услугу</label>
               <select id="service" class="form-control">
-                <option value="1200">Маникюр - 1200 ₽</option>
-                <option value="2200">Педикюр - 2200 ₽</option>
-                <option value="3500">Лечение вросшего ногтя - 3500 ₽</option>
+                <option value="">-- Выберите услугу --</option>
+                <optgroup label="Массажи">
+                  <option value="2000" data-duration="30">Массаж лица - 2 000 ₽</option>
+                  <option value="3000" data-duration="45">Массаж спины - 3 000 ₽</option>
+                  <option value="5000" data-duration="90">Массаж всего тела - 5 000 ₽</option>
+                  <option value="2500" data-duration="60">Массаж классический всего тела - 2 500 ₽</option>
+                </optgroup>
+                <optgroup label="Комплексные программы">
+                  <option value="5000" data-duration="75">Комплекс спина + лицо - 5 000 ₽</option>
+                  <option value="7000" data-duration="120">Комплекс всего тела + лицо - 7 000 ₽</option>
+                </optgroup>
+                <optgroup label="Аппаратная косметология">
+                  <option value="1000" data-duration="30">RF-лифтинг лица - 1 000 ₽</option>
+                  <option value="2000" data-duration="60">RF-лифтинг лица + шеи + декольте - 2 000 ₽</option>
+                  <option value="1000" data-duration="30">Микротоки лица - 1 000 ₽</option>
+                </optgroup>
+                <optgroup label="Пилинги">
+                  <option value="6625" data-duration="60">PRX-T33 - 6 625 ₽</option>
+                  <option value="8750" data-duration="60">BioRePeelCl3 - 8 750 ₽</option>
+                </optgroup>
+                <optgroup label="Уходовые процедуры">
+                  <option value="900" data-duration="30">Альгинатная маска - 900 ₽</option>
+                  <option value="2000" data-duration="60">Чистка лица комбинированная - 2 000 ₽</option>
+                </optgroup>
               </select>
             </div>
             
@@ -1300,19 +1510,12 @@
             
             <div class="form-group">
               <label>Время визита</label>
-              <div class="time-slots">
-                <div class="time-slot">10:00</div>
-                <div class="time-slot">11:00</div>
-                <div class="time-slot">12:00</div>
-                <div class="time-slot">13:00</div>
-                <div class="time-slot">14:00</div>
-                <div class="time-slot">15:00</div>
-                <div class="time-slot">16:00</div>
-                <div class="time-slot">17:00</div>
+              <div class="time-slots" id="time-slots">
+                <!-- Слоты будут генерироваться динамически -->
               </div>
             </div>
             
-            <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Записаться</button>
+            <button type="button" class="btn btn-primary" id="confirm-booking" style="width: 100%; margin-top: 20px;">Записаться</button>
           </form>
         </div>
         
@@ -1371,10 +1574,10 @@
             <div class="contact-details">
               <h4>Социальные сети</h4>
               <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                <a href="https://vk.com/club233204062" target="_blank" class="social-link"><i class="fab fa-vk"></i></a>
+                <a href="https://t.me/kosmetolognada" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                <a href="https://wa.me/79991234567" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
               </div>
             </div>
           </div>
@@ -1393,16 +1596,16 @@
       <div class="footer-container">
         <div class="footer-col">
           <h4>Надежда Гнатюк</h4>
-          <p>Сертифицированный ногтевой мастер и косметолог с 8-летним опытом работы.</p>
+          <p>Сертифицированный косметолог и массажист с 8-летним опытом работы.</p>
         </div>
         
         <div class="footer-col">
           <h4>Услуги</h4>
           <ul>
-            <li><a href="#">Маникюр</a></li>
-            <li><a href="#">Педикюр</a></li>
-            <li><a href="#">Лечение ногтей</a></li>
-            <li><a href="#">Наращивание</a></li>
+            <li><a href="#services">Массажи</a></li>
+            <li><a href="#services">Аппаратная косметология</a></li>
+            <li><a href="#services">Пилинги</a></li>
+            <li><a href="#services">Уходовые процедуры</a></li>
           </ul>
         </div>
         
@@ -1418,10 +1621,10 @@
         <div class="footer-col">
           <h4>Соцсети</h4>
           <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+            <a href="https://vk.com/club233204062" target="_blank" class="social-link"><i class="fab fa-vk"></i></a>
+            <a href="https://t.me/kosmetolognada" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/79991234567" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
       </div>
@@ -1431,6 +1634,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Success Message -->
+  <div class="success-message" id="success-message">
+    <i class="fas fa-check-circle"></i>
+    <h3>Запись подтверждена!</h3>
+    <p>Спасибо за вашу заявку. Мы свяжемся с вами в ближайшее время для подтверждения записи.</p>
+    <p>Чат с ботом открыт для получения напоминаний.</p>
+    <button class="btn btn-primary" style="margin-top: 15px;" onclick="closeSuccessMessage()">Закрыть</button>
+  </div>
 
   <!-- Modal for Gallery -->
   <div class="modal" id="gallery-modal">
@@ -1472,16 +1684,112 @@
         }
       });
     });
+
+    // Booking functionality
+    const dateInput = document.getElementById('date');
+    const timeSlotsContainer = document.getElementById('time-slots');
+    const serviceSelect = document.getElementById('service');
+    const confirmBtn = document.getElementById('confirm-booking');
+    const successMessage = document.getElementById('success-message');
     
-    // Time slot selection
-    const timeSlots = document.querySelectorAll('.time-slot');
+    // Set minimum date to today
+    const today = new Date();
+    dateInput.min = today.toISOString().split('T')[0];
     
-    timeSlots.forEach(slot => {
-      slot.addEventListener('click', () => {
-        timeSlots.forEach(s => s.classList.remove('selected'));
-        slot.classList.add('selected');
-      });
+    // Generate time slots
+    function generateTimeSlots() {
+      timeSlotsContainer.innerHTML = '';
+      const selectedDate = dateInput.value;
+      
+      if (!selectedDate) return;
+      
+      // Check if selected date is in the past
+      const selectedDateObj = new Date(selectedDate);
+      if (selectedDateObj < today) {
+        timeSlotsContainer.innerHTML = '<p style="color: var(--text-light); text-align: center;">Выберите корректную дату</p>';
+        return;
+      }
+      
+      // Generate slots from 10:00 to 18:00 with 30-minute intervals
+      for (let hour = 10; hour < 18; hour++) {
+        for (let minute = 0; minute < 60; minute += 30) {
+          const time = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+          const slot = document.createElement('div');
+          slot.className = 'time-slot';
+          slot.textContent = time;
+          slot.dataset.time = time;
+          
+          // Mark some slots as occupied for demo purposes
+          if (Math.random() > 0.7) {
+            slot.classList.add('occupied');
+          }
+          
+          slot.addEventListener('click', () => {
+            if (!slot.classList.contains('occupied')) {
+              document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+              slot.classList.add('selected');
+            }
+          });
+          
+          timeSlotsContainer.appendChild(slot);
+        }
+      }
+    }
+    
+    // Update time slots when date changes
+    dateInput.addEventListener('change', generateTimeSlots);
+    
+    // Initialize time slots
+    generateTimeSlots();
+    
+    // Handle booking confirmation
+    confirmBtn.addEventListener('click', () => {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const date = dateInput.value;
+      const serviceOption = serviceSelect.options[serviceSelect.selectedIndex];
+      const serviceName = serviceOption.text;
+      const servicePrice = serviceOption.value;
+      const serviceDuration = serviceOption.dataset.duration;
+      const selectedTimeSlot = document.querySelector('.time-slot.selected');
+      
+      // Validation
+      if (!name || !phone || !date || !servicePrice || !selectedTimeSlot) {
+        alert('Пожалуйста, заполните все поля формы и выберите время');
+        return;
+      }
+      
+      // Create booking object
+      const booking = {
+        id: Date.now(),
+        name,
+        phone,
+        date,
+        time: selectedTimeSlot.dataset.time,
+        serviceName,
+        servicePrice,
+        serviceDuration
+      };
+      
+      // In a real application, you would send this to your server
+      console.log('Booking created:', booking);
+      
+      // Show success message
+      successMessage.style.display = 'block';
+      
+      // Open Telegram bot (using the token from your bot.js)
+      const botUrl = `https://t.me/NadezhdaBeauty_Bot?start=${booking.id}`;
+      window.open(botUrl, '_blank');
+      
+      // Reset form
+      document.getElementById('booking-form').reset();
+      generateTimeSlots();
     });
+    
+    // Close success message
+    function closeSuccessMessage() {
+      successMessage.style.display = 'none';
+    }
     
     // Gallery modal
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -1507,22 +1815,6 @@
       }
     });
     
-    // Booking form
-    const bookingForm = document.getElementById('booking-form');
-    const bookNowBtn = document.getElementById('book-now');
-    
-    bookNowBtn.addEventListener('click', () => {
-      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-    });
-    
-    // Set minimum date for booking
-    const dateInput = document.getElementById('date');
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const minDate = tomorrow.toISOString().split('T')[0];
-    dateInput.min = minDate;
-    
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav a').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -1541,6 +1833,16 @@
           nav.classList.remove('active');
         }
       });
+    });
+    
+    // Scroll to booking section when "Записаться онлайн" button is clicked
+    document.getElementById('book-now').addEventListener('click', () => {
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Scroll to gallery section when "Портфолио" button is clicked
+    document.getElementById('view-works').addEventListener('click', () => {
+      document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 </body>

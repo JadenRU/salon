@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Косметолог Надежда Гнатюк | Эстетичный уход и здоровье кожи</title>
+  <meta name="description" content="Сертифицированный косметолог и массажист. Онлайн-запись. Современные методики и индивидуальный подход.">
+
+  <!-- Favicon / OG (положи файлы в public/assets/) -->
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:title" content="Надежда Гнатюк — косметолог">
+  <meta property="og:description" content="Сертифицированный косметолог и массажист. Онлайн‑запись и эффективные процедуры.">
+  <meta property="og:image" content="https://yourdomain.com/assets/og-logo.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="/" class="logo" aria-label="Надежда Гнатюк — на главную">
+        <img src="/assets/logo-ndbeauty.png" alt="N&D Beauty — красота нового времени" class="logo-img">
+      </a>
+
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#booking">Запись</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+   <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>Эстетичный уход & здоровье кожи</h1>
+        <p>Сертифицированный косметолог с 8-летним опытом. Комфорт, результат и индивидуальный подход — всё, что нужно вашей коже.</p>
+
+        <div class="hero-badges">
+          <div class="badge">Опыт 8 лет</div>
+          <div class="badge">Сертифицировано</div>
+          <div class="badge">Гарантия результата</div>
+        </div>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="book-now">Записаться онлайн</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="/assets/photo.jpg" alt="Надежда Гнатюк">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title">Мои услуги</h2>
+
+      <div class="accordion">
+        <!-- Массажи -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Массажи</div>
+            <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item"><div class="service-name">Массаж лица</div><div class="service-duration">30 мин</div><div class="service-price">2 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Массаж спины</div><div class="service-duration">45 мин</div><div class="service-price">3 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Массаж всего тела</div><div class="service-duration">1 ч 30 мин</div><div class="service-price">5 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Массаж головы</div><div class="service-duration">30 мин</div><div class="service-price">1 500 ₽</div></div>
+              <div class="service-item"><div class="service-name">Альгинатная маска</div><div class="service-duration">30 мин</div><div class="service-price">600 ₽</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Комплексные программы -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Комплексные программы</div>
+            <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item"><div class="service-name">Комплекс спина + лицо</div><div class="service-duration">1 ч 15 мин</div><div class="service-price">5 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Комплекс всего тела + лицо</div><div class="service-duration">2 ч</div><div class="service-price">7 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Массаж общий всего тела + лицо</div><div class="service-duration">1 ч 30 мин</div><div class="service-price">3 500 ₽</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Аппаратная косметология -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Аппаратная косметология</div>
+            <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item"><div class="service-name">RF-лифтинг лица</div><div class="service-duration">30 мин</div><div class="service-price">1 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">RF-лифтинг лица + шеи + декольте</div><div class="service-duration">60 мин</div><div class="service-price">2 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Микротоки лица</div><div class="service-duration">30 мин</div><div class="service-price">1 000 ₽</div></div>
+              <div class="service-item"><div class="service-name">Вакуум (зона)</div><div class="service-duration">30 мин</div><div class="service-price">900 ₽</div></div>
+              <div class="service-item"><div class="service-name">Прессотерапия всего тела</div><div class="service-duration">45 мин</div><div class="service-price">1 100 ₽</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Дерматологические пилинги -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Дерматологические пилинги</div>
+            <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item"><div class="service-name">PRX-T33 (Италия)</div><div class="service-duration">Курс 4–10 процедур</div><div class="service-price">6 625 ₽</div></div>
+              <div class="service-item"><div class="service-name">BioRePeelCl3 (Италия)</div><div class="service-duration">Курс 4–10 процедур</div><div class="service-price">8 750 ₽</div></div>
+              <div class="service-item"><div class="service-name">Пилинг Молочный / Tropic / Миндаль</div><div class="service-duration">60 мин</div><div class="service-price">1 500 ₽</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Уходовые процедуры -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-title">Уходовые процедуры</div>
+            <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="accordion-content">
+            <div class="service-list">
+              <div class="service-item"><div class="service-name">Альгинатная маска</div><div class="service-duration">30 мин</div><div class="service-price">600 ₽</div></div>
+              <div class="service-item"><div class="service-name">Чистка лица комбинированная</div><div class="service-duration">60 мин</div><div class="service-price">2 000 ₽</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <h2 class="section-title">Онлайн-запись</h2>
+      <div class="booking-container">
+        <div class="booking-form">
+          <form id="booking-form">
+            <div class="form-group">
+              <label for="service">Выберите услугу</label>
+              <select id="service" class="form-control">
+                <option value="">-- Выберите услугу --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" class="form-control" placeholder="Введите ваше имя">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" class="form-control" placeholder="+7 (XXX) XXX-XX-XX">
+            </div>
+
+            <div class="form-group">
+              <label for="date">Дата визита</label>
+              <input type="date" id="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Время визита</label>
+              <div class="time-slots" id="time-slots"></div>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="confirm-booking" style="width: 100%; margin-top: 20px;">Записаться</button>
+          </form>
+        </div>
+
+        <div class="booking-image">
+          <div class="booking-image-content">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Запишитесь онлайн</h3>
+            <p>Выберите удобное время и дату для визита</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts Section -->
+  <section class="contacts" id="contacts">
+    <div class="container">
+      <h2 class="section-title">Контакты</h2>
+      <div class="contacts-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-details"><h4>Адрес</h4><p>г. Москва, ул. Примерная, д. 123</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-details"><h4>Телефон</h4><p>+7 (977) 886-00-26</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-details"><h4>Часы работы</h4><p>Пн-Пт: 10:00-19:00<br>Сб: 10:00-16:00<br>Вс: выходной</p></div>
+          </div>
+        </div>
+
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.372951239977!2d37.617299315930664!3d55.75582668055313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1623755117893!5m2!1sru!2sru" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col"><h4>Надежда Гнатюк</h4><p>Сертифицированный косметолог и массажист с 8-летним опытом.</p></div>
+        <div class="footer-col"><h4>Услуги</h4><ul><li><a href="#services">Массажи</a></li><li><a href="#services">Аппаратная косметология</a></li><li><a href="#services">Пилинги</a></li></ul></div>
+        <div class="footer-col"><h4>Контакты</h4><ul><li><a href="tel:+79778860026">+7 (977) 886 00 26 </a></li><li>,</li></ul></div>
+        <div class="footer-col"><h4>Соцсети</h4><div class="social-links"><a href="https://vk.com/club233204062" target="_blank" class="social-link"><i class="fab fa-vk"></i></a><a href="https://t.me/kosmetolognada" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a></div></div>
+      </div>
+
+      <div class="copyright">© 2025 Надежда Гнатюк. Все права защищены.</div>
+    </div>
+  </footer>
+
+  <!-- Success Message -->
+  <div class="success-message" id="success-message">
+    <i class="fas fa-check-circle"></i>
+    <h3>Запись подтверждена!</h3>
+    <p>Спасибо за вашу заявку. Мы свяжемся с вами в ближайшее время для подтверждения записи.</p>
+    <button class="btn btn-primary" style="margin-top: 15px;" onclick="closeSuccessMessage()">Закрыть</button>
+  </div>
+
+  <!-- Modal for Gallery -->
+  <div class="modal" id="gallery-modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-body">
+        <img src="" alt="" class="modal-image" id="modal-image">
+      </div>
+    </div>
+  </div>
+
+  <script src="/main.js"></script>
+</body>
+</html>

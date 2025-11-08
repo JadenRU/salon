@@ -3,7 +3,7 @@ const express = require('express');
 
 // Твой бот
 const TOKEN = '8291779359:AAFMrCuA6GNyiHSsudpKhI7IdHEmOn8ulaI';
-const ADMIN_ID = 828439309;
+const ADMIN_ID = 1793780780;
 
 const app = express();
 app.use(express.json());
